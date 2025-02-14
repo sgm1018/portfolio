@@ -1,0 +1,89 @@
+---
+const navItems = [
+  { name: 'Home', href: '#home' },
+  { name: 'Services', href: '#services' },
+  { name: 'About', href: '#about' },
+  { name: 'Portfolio', href: '#portfolio' },
+  { name: 'Contact', href: '#contact' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-sm border-b border-dark-700">
+  <nav class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <a href="#home" class="text-2xl font-bold text-white">
+        <span class="text-primary">Sergio</span>Gonzalez
+      </a>
+      
+      <ul class="hidden md:flex items-center gap-8">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-dark-300 hover:text-primary transition-colors duration-300"
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <button
+        id="mobile-menu-button"
+        class="md:hidden text-white hover:text-primary transition-colors duration-300"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="md:hidden hidden absolute top-full left-0 right-0 bg-dark-800 border-b border-dark-700"
+    >
+      <ul class="container mx-auto px-6 py-4 space-y-4">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="block text-dark-300 hover:text-primary transition-colors duration-300"
+            >
+              {item.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking on a link
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  }
+</script>

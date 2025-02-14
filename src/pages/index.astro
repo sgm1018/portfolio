@@ -1,0 +1,398 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="Your Name - Portfolio">
+  <Navbar />
+  
+  <main class="pt-20">
+    <!-- Hero -->
+    <section id="home" class="min-h-screen flex items-center">
+      <div class="container mx-auto px-6 py-12">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-8">
+            <h1 class="text-5xl md:text-6xl font-bold text-nowrap text-primary">Sergio González</h1>
+            <p class="text-xl text-dark-300">
+              Desarrollador <span class="font-semibold text-dark-200">Full Stack</span> <span class="font-semibold text-dark-200">DevSecOps</span> enfocado en crear experiencias digitales seguras y eficientes.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="#portfolio"
+                class="inline-block px-6 py-3 bg-primary hover:bg-primary-600 text-primary-foreground rounded-lg transition-colors duration-300"
+              >
+                Ver Proyectos
+              </a>
+              <a
+                href="#contact"
+                class="inline-block px-6 py-3 border border-primary text-primary hover:bg-dark-700 hover:border-dark-100 hover:text-primary-foreground rounded-lg transition-colors duration-300"
+              >
+                Contactar
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="aspect-square bg-dark-800 rounded-full overflow-hidden">
+              <img
+                src="your-image-url.jpg"
+                alt="Your Name"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-20 bg-dark-800/50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Lo que hago</h2>
+          <p class="text-dark-300 max-w-2xl mx-auto">
+            Ofrezco soluciones digitales completas, desde el diseño hasta la implementación
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Desarrollo Web Completo",
+              description: "Creación de sitios web modernos completos y rápidos con las últimas tecnologías",
+              icon: "🌐"
+            },
+            {
+              title: "Frontend Development",
+              description: "Construcción de interfaces de usuario atractivas y accesibles",
+              icon: "🎨"
+            },
+            {
+              title: "Backend Development",
+              description: "Desarrollo de APIs robustas, seguras y sistemas escalables",
+              icon: "⚙️"
+            },
+            {
+              title: "Soluciones DevOps",
+              description: "Automatización de procesos, integración continua y despliegue continuo, seguridad y monitoreo",
+              icon: "🚀"
+            },
+            {
+              title: "Consultoría Tech",
+              description: "Asesoramiento en tecnología y soluciones digitales",
+              icon: "💡"
+            },
+            {
+              title: "Aplicaciones Móviles",
+              description: "Desarrollo de apps nativas y multiplataforma para iOS y Android",
+              icon: "📱"
+            },
+          ].map((service) => (
+            <div class="bg-dark-800 p-6 rounded-lg border border-dark-700 hover:border-primary transition-colors duration-300">
+              <div class="text-4xl mb-4 text-center">{service.icon}</div>
+              <h3 class="text-xl font-bold mb-2 text-center">{service.title}</h3>
+              <p class="text-dark-300 text-center">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Mi Portfolio</h2>
+          <p class="text-dark-300 max-w-2xl mx-auto">
+            Una selección de mis proyectos más recientes y destacados
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Ejemplo1",
+              description: "Plataforma de comercio electrónico con React y Node.js",
+              image: "project1.jpg",
+              tags: ["React", "Node.js", "MongoDB"],
+              demo: "#",
+              github: "#"
+            },
+            {
+              title: "Ejemplo1",
+              description: "Aplicación de gestión de tareas con React Native",
+              image: "project2.jpg",
+              tags: ["React Native", "Firebase"],
+              demo: "#",
+              github: "#"
+            },
+            {
+              title: "Ejemplo1",
+              description: "Sitio web personal con Astro y Tailwind CSS",
+              image: "project3.jpg",
+              tags: ["Astro", "Tailwind CSS"],
+              demo: "#",
+              github: "#"
+            }
+          ].map((project) => (
+            <div class="bg-dark-800 rounded-lg overflow-hidden border border-dark-700 hover:border-primary transition-colors duration-300 cursor-pointer">
+              <div class="aspect-video bg-dark-700">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+                <p class="text-dark-300 mb-4">{project.description}</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {project.tags.map((tag) => (
+                    <span class="px-2 py-1 bg-dark-700 rounded text-xs text-dark-300">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div class="flex gap-4">
+                  <a
+                    href={project.demo}
+                    class="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors duration-300"
+                  >
+                    <span class="inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                        <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
+                      </svg>
+                    </span>
+                    <span>Demo</span>
+                  </a>
+                  <a
+                    href={project.github}
+                    class="flex items-center gap-2 text-primary hover:text-primary-400 transition-colors duration-300"
+                  >
+                    <span class="inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>GitHub</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Experience -->
+    <section id="experience" class="py-20 bg-dark-800/50">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Experiencia</h2>
+          <p class="text-dark-300 max-w-2xl mx-auto">
+            Mi trayectoria profesional
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+            {[
+            {
+              period: "2022 - Presente",
+              company: "Compañia1",
+              position: "Position1",
+              description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam."
+            },
+            {
+              period: "2020 - 2022",
+              company: "Compañia2",
+              position: "Position2",
+              description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam."
+            },
+            {
+              period: "2018 - 2020",
+              company: "Compañia3",
+              position: "Position3",
+              description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam."
+            }
+          ].map((exp, index, array) => (
+            <div class="relative pl-10 pb-12 timeline-dot last:pb-0">
+              <div class={`${index !== array.length - 1 ? 'timeline-line' : ''}`}>
+                <div class="bg-dark-800 p-6 rounded-lg border border-dark-700">
+                  <span class="text-primary font-medium">{exp.period}</span>
+                  <h3 class="text-xl font-bold mt-2">{exp.position}</h3>
+                  <p class="text-dark-300 mt-1">{exp.company}</p>
+                  <p class="text-dark-400 mt-4">{exp.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+    
+    <!-- Technologies  -->
+    <section id="technologies" class="py-20">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Tecnologías</h2>
+          <p class="text-dark-300 max-w-2xl mx-auto">
+            Herramientas y tecnologías con las que trabajo
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 justify-items-center">
+            {[
+            { name: 'JavaScript', icon: 'devicon-javascript-plain' },
+            { name: 'TypeScript', icon: 'devicon-typescript-plain' },
+            { name: 'Python', icon: 'devicon-python-plain' },
+            { name: 'Java', icon: 'devicon-java-plain' },
+            { name: 'C++', icon: 'devicon-cplusplus-plain' },
+            { name: 'Rust', icon: 'devicon-rust-plain' },
+            { name: 'Css', icon: 'devicon-css3-plain'},  
+            { name: 'Tailwind', icon: 'devicon-tailwindcss-plain'},  
+            { name: 'Bash Scripting', icon: 'devicon-bash-plain' },
+            { name: 'Docker', icon: 'devicon-docker-plain' },
+            { name: 'Kubernetes', icon: 'devicon-kubernetes-plain' },
+            { name: 'Ansible', icon: 'devicon-ansible-plain' },
+            { name: '.NET', icon: 'devicon-dotnetcore-plain' },
+            { name: 'NestJS', icon: 'devicon-nestjs-plain' },
+            { name: 'Flask', icon: 'devicon-flask-original' },
+            { name: 'Spring Boot', icon: 'devicon-spring-plain' },
+            { name: 'Angular', icon: 'devicon-angularjs-plain' },
+            { name: 'Astro', icon: 'devicon-astro-plain' }
+          ].map((tech) => (
+            <div class="tech-icon cursor-pointer" title={tech.name}>
+              <i class={tech.icon}></i>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-dark-800/50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-2xl mx-auto">
+          <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Contacto</h2>
+            <p class="text-dark-300">
+              ¿Tienes un proyecto en mente? ¡Hablemos!
+            </p>
+          </div>
+
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-dark-300 mb-2">
+                Nombre
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground"
+                required
+              />
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-dark-300 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-dark-300 mb-2">
+                Mensaje
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full px-6 py-3 bg-primary hover:bg-primary-600 text-primary-foreground rounded-lg transition-colors duration-300"
+            >
+              Enviar Mensaje
+            </button>
+          </form>
+
+          <div class="mt-12 flex justify-center gap-6">
+            <a
+              href="https://github.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
+            >
+              <i class="devicon-github-original text-2xl"></i>
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
+            >
+              <i class="devicon-linkedin-plain text-2xl"></i>
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href="https://twitter.com/yourusername"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
+            >
+              <i class="devicon-twitter-original text-2xl"></i>
+              <span>Twitter</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-dark-700">
+      <div class="container mx-auto px-6 text-center text-dark-300">
+        <div class="flex items-center justify-center gap-2 mb-4">
+          <span>Creado con</span>
+          <a 
+            href="https://astro.build" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-primary hover:text-primary-400 transition-colors duration-300"
+          >
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.92724 23.6324C5.44235 22.5831 5.16174 21.4518 5.16174 20.2929C5.16174 15.8836 8.73952 12.3058 13.1488 12.3058C17.5581 12.3058 21.1359 15.8836 21.1359 20.2929C21.1359 21.4518 20.8553 22.5831 20.3704 23.6324C19.8856 24.6817 19.1853 25.6173 18.3151 26.4875C17.4449 27.3577 16.5094 28.058 15.4601 28.5428C14.4108 29.0277 13.2795 29.3083 12.1206 29.3083C10.9617 29.3083 9.83039 29.0277 8.78111 28.5428C7.73183 28.058 6.79628 27.3577 5.92607 26.4875C5.05587 25.6173 4.35559 24.6817 3.87071 23.6324H5.92724ZM13.1488 14.363C9.87661 14.363 7.21893 17.0207 7.21893 20.2929C7.21893 23.5651 9.87661 26.2228 13.1488 26.2228C16.421 26.2228 19.0787 23.5651 19.0787 20.2929C19.0787 17.0207 16.421 14.363 13.1488 14.363Z" fill="currentColor"/>
+              <path d="M12.5022 2.98726C12.6668 2.74239 12.9027 2.54591 13.1842 2.41563C13.4656 2.28535 13.7799 2.22602 14.0892 2.24352C14.3985 2.26103 14.6983 2.35471 14.9602 2.51647C15.2221 2.67823 15.4367 2.90299 15.5825 3.16976L26.9813 23.6324H23.0169L14.0524 6.85711L12.5022 2.98726Z" fill="currentColor"/>
+            </svg>
+            <span>Astro</span>
+          </a>
+        </div>
+        <div class="flex items-center justify-center gap-2">
+          <p>By <span class="font-semibold">Sergio González Martínez.</span></p>
+          <a 
+            href="https://github.com/yourusername/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-primary hover:text-primary-400 transition-colors duration-300"
+          >
+            <i class="devicon-github-original"></i>
+            <span>Ver código fuente</span>
+          </a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>

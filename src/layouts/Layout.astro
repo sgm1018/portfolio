@@ -1,0 +1,103 @@
+---
+import '@fontsource-variable/inter';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title, 
+  description = "Professional portfolio website showcasing my work and skills"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-background text-foreground">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --background: #1A1B1E;
+    --foreground: #FFFFFF;
+    
+    --primary: #FF1E56;
+    --primary-foreground: #FFFFFF;
+    --primary-50: #FFE5EC;
+    --primary-100: #FFB8C9;
+    --primary-200: #FF8AA7;
+    --primary-300: #FF5C84;
+    --primary-400: #FF2E62;
+    --primary-500: #FF1E56;
+    --primary-600: #CC1845;
+    --primary-700: #991234;
+    --primary-800: #660C23;
+    --primary-900: #330611;
+
+    --dark: #1A1B1E;
+    --dark-50: #F8F9FA;
+    --dark-100: #E9ECEF;
+    --dark-200: #DEE2E6;
+    --dark-300: #CED4DA;
+    --dark-400: #ADB5BD;
+    --dark-500: #6C757D;
+    --dark-600: #495057;
+    --dark-700: #343A40;
+    --dark-800: #212529;
+    --dark-900: #1A1B1E;
+  }
+
+  html {
+    font-family: 'Inter Variable', system-ui, sans-serif;
+    background: var(--background);
+    background-size: 224px;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+  }
+
+  .tech-icon {
+    @apply w-20 h-20 rounded-full flex items-center justify-center bg-dark-800 border-2 border-dark-700 transition-all duration-300;
+  }
+
+  .tech-icon i {
+    @apply text-4xl text-dark-300 transition-colors duration-300;
+  }
+
+  .tech-icon:hover {
+    @apply border-primary;
+  }
+
+  .tech-icon:hover i {
+    @apply text-primary;
+  }
+
+  .timeline-dot::before {
+    content: '';
+    @apply absolute w-3 h-3 bg-primary rounded-full left-0 top-2 -translate-x-1/2;
+  }
+
+  .timeline-line::after {
+    content: '';
+    @apply absolute w-0.5 bg-dark-700 left-0 top-4 bottom-0 -translate-x-1/2;
+  }
+</style>
