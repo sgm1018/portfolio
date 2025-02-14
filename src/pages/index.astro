@@ -8,9 +8,8 @@ import Navbar from "../components/Navbar.astro";
   <style>
     .background-image {
       position: relative;
-      width: 30vw;
+      width: 20vw;
       height: 100%; /* altura completa de la pantalla, ajústala según necesites */
-      background: url("/ruta/a/tu-imagen.jpg") no-repeat center center;
       background-size: cover;
     }
 
@@ -37,19 +36,19 @@ import Navbar from "../components/Navbar.astro";
       bottom: 0;
       left: 0;
       right: 0;
-      height: 25%; /* Ajusta la altura del gradiente según sea necesario */
+      height: 25%; /* Ajusta la altura del gradiente */
       background: linear-gradient(to bottom, transparent, var(--background));
-      pointer-events: none; /* Para que no interfiera con otros elementos */
+      pointer-events: none;
     }
   </style>
   <main class="pt-20">
     <!-- Hero -->
     <section id="home" class="min-h-screen flex items-center">
       <div class="container mx-auto px-6 py-12">
-        <div class="flex flex-row flex-nowrap gap-12 items-center">
+        <div class="flex flex-row flex-nowrap gap-20 items-center">
           <div class="space-y-8">
             <h1 class="text-5xl md:text-6xl font-bold text-nowrap text-primary">
-              Sergio González
+              <span class="text-white">Sergio</span> González
             </h1>
             <p class="text-xl text-dark-300">
               Desarrollador <span class="font-semibold text-dark-200"
@@ -73,7 +72,7 @@ import Navbar from "../components/Navbar.astro";
               </a>
             </div>
           </div>
-          <div class="relative hidden sm:block md:w-96 md:h-96">
+          <div class="relative hidden sm:block sm:w-44 sm:h-44 md:w-96 md:h-60 lg:w-60 lg:h-96">
             <div
               class="background-image object-cover w-full h-full rounded-lg overflow-hidden"
             >
@@ -92,7 +91,7 @@ import Navbar from "../components/Navbar.astro";
     <section id="services" class="py-20 bg-dark-800/50">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Lo que hago</h2>
+            <h2 class="text-4xl font-bold mb-4">Mis <span class="text-primary">Servicios</span></h2>
           <p class="text-dark-300 max-w-2xl mx-auto">
             Ofrezco soluciones digitales completas, desde el diseño hasta la
             implementación
@@ -156,7 +155,7 @@ import Navbar from "../components/Navbar.astro";
     <section id="portfolio" class="py-20">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Mi Portfolio</h2>
+          <h2 class="text-4xl font-bold mb-4">Mi <span class="text-primary">Portfolio</span></h2>
           <p class="text-dark-300 max-w-2xl mx-auto">
             Una selección de mis proyectos más recientes y destacados
           </p>
@@ -259,7 +258,7 @@ import Navbar from "../components/Navbar.astro";
     <section id="experience" class="py-20 bg-dark-800/50">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Experiencia</h2>
+          <h2 class="text-4xl font-bold mb-4">Experiencia <span class="text-primary">Profesional</span> </h2>
           <p class="text-dark-300 max-w-2xl mx-auto">
             Mi trayectoria profesional
           </p>
@@ -312,7 +311,7 @@ import Navbar from "../components/Navbar.astro";
     <section id="technologies" class="py-20">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Tecnologías</h2>
+          <h2 class="text-4xl font-bold mb-4">Mis <span class="text-primary">Tecnologías</span></h2>
           <p class="text-dark-300 max-w-2xl mx-auto">
             Herramientas y tecnologías con las que trabajo
           </p>
@@ -341,6 +340,15 @@ import Navbar from "../components/Navbar.astro";
               { name: "Spring Boot", icon: "devicon-spring-plain" },
               { name: "Angular", icon: "devicon-angularjs-plain" },
               { name: "Astro", icon: "devicon-astro-plain" },
+              { name: "MySQL", icon: "devicon-mysql-plain" },
+              { name: "PostgreSQL", icon: "devicon-postgresql-plain" },
+              { name: "MongoDB", icon: "devicon-mongodb-plain" },
+              { name: "Redis", icon: "devicon-redis-plain" },
+              { name: "SQL Server", icon: "devicon-microsoftsqlserver-plain" },
+              { name: "Apache", icon: "devicon-apache-plain" },
+              { name: "Nginx", icon: "devicon-nginx-original" },
+              { name: "Google Cloud", icon: "devicon-googlecloud-plain" },
+              { name: "AWS", icon: "devicon-amazonwebservices-plain" },
             ].map((tech) => (
               <div class="tech-icon cursor-pointer" title={tech.name}>
                 <i class={tech.icon} />
@@ -356,7 +364,7 @@ import Navbar from "../components/Navbar.astro";
       <div class="container mx-auto px-6">
         <div class="max-w-2xl mx-auto">
           <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4">Contacto</h2>
+            <h2 class="text-4xl font-bold mb-4"><span class="text-primary">Contacto</span></h2>
             <p class="text-dark-300">
               ¿Tienes un proyecto en mente? ¡Hablemos!
             </p>
@@ -420,7 +428,7 @@ import Navbar from "../components/Navbar.astro";
 
           <div class="mt-12 flex justify-center gap-6">
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/sgm1018"
               target="_blank"
               rel="noopener noreferrer"
               class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
@@ -429,7 +437,7 @@ import Navbar from "../components/Navbar.astro";
               <span>GitHub</span>
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/sergiogm1999"
               target="_blank"
               rel="noopener noreferrer"
               class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
@@ -438,7 +446,7 @@ import Navbar from "../components/Navbar.astro";
               <span>LinkedIn</span>
             </a>
             <a
-              href="https://twitter.com/yourusername"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
               class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
@@ -462,29 +470,14 @@ import Navbar from "../components/Navbar.astro";
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1 text-primary hover:text-primary-400 transition-colors duration-300"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 32 32"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M5.92724 23.6324C5.44235 22.5831 5.16174 21.4518 5.16174 20.2929C5.16174 15.8836 8.73952 12.3058 13.1488 12.3058C17.5581 12.3058 21.1359 15.8836 21.1359 20.2929C21.1359 21.4518 20.8553 22.5831 20.3704 23.6324C19.8856 24.6817 19.1853 25.6173 18.3151 26.4875C17.4449 27.3577 16.5094 28.058 15.4601 28.5428C14.4108 29.0277 13.2795 29.3083 12.1206 29.3083C10.9617 29.3083 9.83039 29.0277 8.78111 28.5428C7.73183 28.058 6.79628 27.3577 5.92607 26.4875C5.05587 25.6173 4.35559 24.6817 3.87071 23.6324H5.92724ZM13.1488 14.363C9.87661 14.363 7.21893 17.0207 7.21893 20.2929C7.21893 23.5651 9.87661 26.2228 13.1488 26.2228C16.421 26.2228 19.0787 23.5651 19.0787 20.2929C19.0787 17.0207 16.421 14.363 13.1488 14.363Z"
-                fill="currentColor"></path>
-              <path
-                d="M12.5022 2.98726C12.6668 2.74239 12.9027 2.54591 13.1842 2.41563C13.4656 2.28535 13.7799 2.22602 14.0892 2.24352C14.3985 2.26103 14.6983 2.35471 14.9602 2.51647C15.2221 2.67823 15.4367 2.90299 15.5825 3.16976L26.9813 23.6324H23.0169L14.0524 6.85711L12.5022 2.98726Z"
-                fill="currentColor"></path>
-            </svg>
+            <i class="devicon-astro-plain"></i>
             <span>Astro</span>
           </a>
         </div>
         <div class="flex items-center justify-center gap-2">
           <p>By <span class="font-semibold">Sergio González Martínez.</span></p>
           <a
-            href="https://github.com/yourusername/portfolio"
+            href="https://github.com/sgm1018/portfolio"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-1 text-primary hover:text-primary-400 transition-colors duration-300"
