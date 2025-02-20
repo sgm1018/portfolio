@@ -1,50 +1,59 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/3030d1fe-c467-401b-8683-5420f2237d9a/deploy-status)](https://app.netlify.com/sites/sergiogonzalezmartinez/deploys)
+# Portfolio Website - Built with Astro
 
-# Astro Starter Kit: Basics
+![image](https://github.com/user-attachments/assets/d8989193-bc86-4cc4-a132-95d188006175)
+![image](https://github.com/user-attachments/assets/9fbfcb9a-b7d5-4f5e-b120-9a516ec939c5)
+![image](https://github.com/user-attachments/assets/ea0f935a-79b6-440c-a214-2445cdf093ae)
 
-```sh
-npm create astro@latest -- --template basics
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Astro-5.2%2B-purple?logo=astro&logoColor=white" alt="Astro Badge">
+</p>
+
+## Why Astro?
+Astro was chosen over other frameworks like React, Angular, and Next.js for its unique features that align perfectly with a **portfolio website**:
+- **SEO Benefits**: Static site generation (SSG) ensures content is pre-rendered, boosting search rankings.
+- **Faster Load Times**: Only ships essential JavaScript, unlike React or Angular which load large JS bundles.
+- **SSR for Dynamic Content**: Allows fetching data dynamically without compromising performance.
+- **Component Islands Architecture**: Uses only client-side interactivity where needed, keeping the site lightweight.
+  
+## Features
+- **Blazing-Fast Performance**: Astro delivers static pages by default, ensuring rapid load times.
+- **SEO Optimized**: Pre-rendered pages improve search engine visibility.
+- **Minimal JavaScript**: Ships only the necessary JavaScript to improve performance.
+- **Server-Side Rendering (SSR) Support**: Ideal for dynamic content while maintaining efficiency.
+
+## Getting Started
+Follow the steps below to set up and use the portfolio on your local machine.
+
+### Prerequisites
+- Node.js 22+ (Recommended)
+- Astro 5.0+
+- A modern browser (Chrome, Firefox, Edge, Vivaldi(I'am using this, is so good, chromium fork)
+
+
+## Installation
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/sgm1018/portfolio.git
+cd portfolio
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+### Step 2: Install Dependencies
+```bash
+npm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Usage
+### Run the Development Server
+```bash
+npm run dev
+```
+### Build for Production
+```bash
+npm run build
+```
 
-## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
