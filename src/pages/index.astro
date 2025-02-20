@@ -165,30 +165,38 @@ import Navbar from "../components/Navbar.astro";
           {
             [
               {
-                title: "Ejemplo1",
+                title: "GitLLMTrainer",
                 description:
-                  "Plataforma de comercio electrónico con React y Node.js",
-                image: "project1.jpg",
-                tags: ["React", "Node.js", "MongoDB"],
-                demo: "#",
-                github: "#",
+                  "Una herramienta para rastrear repositorios de GitHub, extraer su contenido y generar conjuntos de datos estructurados para entrenar LLMs.",
+                image: "/projects/gitllmtrainer.png",
+                tags: ["Python"],
+                demo: "https://github.com/sgm1018/GitLLMTrainer",
+                github: "https://github.com/sgm1018/GitLLMTrainer",
               },
               {
-                title: "Ejemplo1",
-                description: "Aplicación de gestión de tareas con React Native",
-                image: "project2.jpg",
-                tags: ["React Native", "Firebase"],
-                demo: "#",
-                github: "#",
+                title: "Web App builder",
+                description: "Generador de aplicaciones web completas, abarcando desde la creación de la base de datos y API, hasta una interfaz de usuario moderna con autenticación por token JWT. También incluye chat con WebSockets, gestión de roles y soporte, y despliegue de las aplicaciones generadas.",
+                image: "/projects/builder.png",
+                tags: [".NET", "Angular", "Docker", "WebSockets", "JWT", "Mongo DB", "Tailwind CSS"],
+                demo: "https://github.com/tfgsergiogonzalezmartinez/stack_generador",
+                github: "https://github.com/tfgsergiogonzalezmartinez/stack_generador",
               },
               {
-                title: "Ejemplo1",
-                description: "Sitio web personal con Astro y Tailwind CSS",
-                image: "project3.jpg",
+                title: "Star Repo Graph",
+                description: "Aplicación basada en Astro para capturar estrellas de repositorios de GitHub, generar gráficos elegantes, exportarlos como archivos SVG e incrustarlos directamente en archivos README.md.",
+                image: "/projects/stars.png",
                 tags: ["Astro", "Tailwind CSS"],
-                demo: "#",
-                github: "#",
+                demo: "https://github.com/sgm1018/star-repo-graph",
+                github: "https://github.com/sgm1018/star-repo-graph",
               },
+              {
+                title: "TeacherCloud",
+                description: "Plataforma de gestión de cursos en línea para profesores y estudiantes, con funcionalidades para la administración de clases, tareas, control de eventos, mensajeria, exámenes, calificaciones, foros y contenidos del curso.",
+                image: "/projects/teachercloud.png",
+                tags: ["Spring Boot", "Angular", "MySQL", "Docker", "Tailwind CSS"],
+                demo: "https://github.com/sgm1018/TeacherCloud/tree/desarrollo",
+                github: "https://github.com/sgm1018/TeacherCloud/tree/desarrollo",
+              }
             ].map((project) => (
               <div class="bg-dark-800 rounded-lg overflow-hidden border border-dark-700 hover:border-primary transition-colors duration-300 cursor-pointer">
                 <div class="aspect-video bg-dark-700">
