@@ -72,7 +72,7 @@ import Navbar from "../components/Navbar.astro";
               </a>
             </div>
           </div>
-          <div class="relative hidden sm:block sm:w-44 sm:h-44 md:w-96 md:h-60 lg:w-full lg:h-full">
+          <div class="relative hidden sm:block sm:w-44 sm:h-44 md:w-full md:h-full lg:w-full lg:h-full">
             <div
               class="background-image object-cover w-full h-full rounded-lg overflow-hidden"
             >
@@ -365,102 +365,76 @@ import Navbar from "../components/Navbar.astro";
     <!-- Contact -->
     <section id="contact" class="py-20 bg-dark-800/50">
       <div class="container mx-auto px-6">
-        <div class="max-w-2xl mx-auto">
-          <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4"><span class="text-primary">Contacto</span></h2>
-            <p class="text-dark-300">
-              ¿Tienes un proyecto en mente? ¡Hablemos!
-            </p>
-          </div>
+      <div class="max-w-2xl mx-auto">
+        <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4"><span class="text-primary">Contacto</span></h2>
+        <p class="text-dark-300">
+          ¿Tienes un proyecto en mente? ¡Hablemos!
+        </p>
+        </div>
 
-          <form class="space-y-6">
-            <div>
-              <label
-                for="name"
-                class="block text-sm font-medium text-dark-300 mb-2"
-              >
-                Nombre
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground"
-                required
-              />
-            </div>
+        <form id="contact-form" class="space-y-6" action="https://formsubmit.co/1018sgm10182@gmail.com" method="POST" onsubmit="handleSubmit(event)">
+        <div>
+          <label for="name" class="block text-sm font-medium text-dark-300 mb-2">Nombre</label>
+          <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground" required />
+        </div>
 
-            <div>
-              <label
-                for="email"
-                class="block text-sm font-medium text-dark-300 mb-2"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground"
-                required
-              />
-            </div>
+        <div>
+          <label for="email" class="block text-sm font-medium text-dark-300 mb-2">Email</label>
+          <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground" required />
+        </div>
 
-            <div>
-              <label
-                for="message"
-                class="block text-sm font-medium text-dark-300 mb-2"
-              >
-                Mensaje
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground"
-                required></textarea>
-            </div>
+        <div>
+          <label for="message" class="block text-sm font-medium text-dark-300 mb-2">Mensaje</label>
+          <textarea id="message" name="message" rows="6" class="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-lg focus:outline-none focus:border-primary text-foreground" required></textarea>
+        </div>
 
-            <button
-              type="submit"
-              class="w-full px-6 py-3 bg-primary hover:bg-primary-600 text-primary-foreground rounded-lg transition-colors duration-300"
-            >
-              Enviar Mensaje
-            </button>
-          </form>
+        <button type="submit" class="w-full px-6 py-3 bg-primary hover:bg-primary-600 text-primary-foreground rounded-lg transition-colors duration-300">Enviar Mensaje</button>
+        </form>
 
-          <div class="mt-12 flex justify-center gap-6">
-            <a
-              href="https://github.com/sgm1018"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
-            >
-              <i class="devicon-github-original text-2xl"></i>
-              <span>GitHub</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/sergiogm1999"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
-            >
-              <i class="devicon-linkedin-plain text-2xl"></i>
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2"
-            >
-              <i class="devicon-twitter-original text-2xl"></i>
-              <span>Twitter</span>
-            </a>
-          </div>
+        <div id="success-message" class="hidden mt-4 text-center text-green-500">Mensaje enviado.</div>
+
+        <div class="mt-12 flex justify-center gap-6">
+        <a href="https://github.com/sgm1018" target="_blank" rel="noopener noreferrer" class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2">
+          <i class="devicon-github-original text-2xl"></i>
+          <span>GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/sergiogm1999" target="_blank" rel="noopener noreferrer" class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2">
+          <i class="devicon-linkedin-plain text-2xl"></i>
+          <span>LinkedIn</span>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="text-dark-300 hover:text-primary transition-colors duration-300 flex items-center gap-2">
+          <i class="devicon-twitter-original text-2xl"></i>
+          <span>Twitter</span>
+        </a>
         </div>
       </div>
+      </div>
     </section>
+
+    <script>
+      function handleSubmit(event: { preventDefault: () => void; target: any; }) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+        'Accept': 'application/json'
+        }
+      }).then(response => {
+        if (response.ok) {
+        document!.getElementById('success-message')!.classList.remove('hidden');
+        form.reset();
+        } else {
+        alert('Hubo un problema al enviar el mensaje.');
+        }
+      }).catch(error => {
+        alert('Hubo un problema al enviar el mensaje.');
+      });
+      }
+    </script>
 
     <!-- Footer -->
     <footer class="py-8 border-t border-dark-700">
