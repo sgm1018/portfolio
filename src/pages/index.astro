@@ -43,9 +43,10 @@ import Navbar from "../components/Navbar.astro";
   </style>
   <main class="pt-20">
     <!-- Hero -->
-    <section id="home" class="min-h-screen flex items-center">
-      <div class="container mx-auto px-6 py-12">
-        <div class="flex flex-row flex-nowrap gap-20 items-center">
+    <!-- Hero -->
+    <section id="home" class="min-h-screen flex items-center justify-center">
+      <div class="container flex justify-center items-center mx-auto px-6 py-12">
+        <div class="flex flex-row flex-nowrap gap-20 items-center just">
           <div class="space-y-8">
             <h1 class="text-5xl md:text-6xl font-bold text-nowrap text-primary">
               <span class="text-white">Sergio</span> González
@@ -72,13 +73,13 @@ import Navbar from "../components/Navbar.astro";
               </a>
             </div>
           </div>
-          <div class="relative hidden sm:block sm:w-44 sm:h-44 md:w-full md:h-full lg:w-full lg:h-full">
+          <div class="relative hidden sm:block sm:w-56 sm:h-56 md:w-96 md:h-60 lg:w-96 lg:h-80 xl:w-96 xl:h-96 2xl:w-96 2xl:h-full">
             <div
               class="background-image object-cover w-full h-full rounded-lg overflow-hidden"
             >
               <img
-                src="/avatar-bg.png"
-                alt="Sergio Gonzalez Martinez"
+                src="public/avatar-bg.png"
+                alt="Your Name"
                 class="w-full h-full object-cover"
               />
             </div>
@@ -359,6 +360,46 @@ import Navbar from "../components/Navbar.astro";
             ))
           }
         </div>
+      </div>
+    </section>
+
+
+    <!-- Education -->
+    <section id="education" class="py-20">
+      <div class="container mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-bold mb-4">Mi <span class="text-primary">Educación</span></h2>
+        <p class="text-dark-300 max-w-2xl mx-auto">
+        Mi formación académica
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-8">
+        {
+        [
+          {
+          institution: "Universidad de Burgos (UBU)",
+          degree: "Ingeniería Informática",
+          description:
+            "Graduado en Ingeniería Informática.",
+          image: "/ubu.svg",
+          },
+        ].map((edu) => (
+          <div class="flex flex-row md:flex-row items-center gap-8">
+          <div class="flex w-1/4 justify-center items-center ">
+            <img src={edu.image} alt={edu.institution} class="h-[200px] object-contain rounded-lg" />
+          </div>
+          <div class="w-full md:w-2/3">
+            <div class="bg-dark-800 p-6 rounded-lg border border-dark-700">
+            <h3 class="text-xl font-bold mt-2">{edu.degree}</h3>
+            <p class="text-dark-300 mt-1">{edu.institution}</p>
+            <p class="text-dark-400 mt-4">{edu.description}</p>
+            </div>
+          </div>
+          </div>
+        ))
+        }
+      </div>
       </div>
     </section>
 
