@@ -44,13 +44,13 @@ import Navbar from "../components/Navbar.astro";
   <main class="pt-20">
     <!-- Hero -->
     <section id="home" class="min-h-screen flex items-center justify-center">
-      <div class="container flex justify-center items-center mx-auto px-6 py-12">
+      <div class="container flex justify-center items-center px-6 py-12">
         <div class="flex flex-row flex-nowrap gap-20 items-center just">
-          <div class="space-y-8">
-            <h1 class="text-5xl md:text-6xl font-bold text-nowrap text-primary">
+          <div class="flex flex-col gap-4">
+            <h1 class="text-2xl sm:text-4xl xl:text-6xl font-bold text-nowrap text-primary">
               <span class="text-white">Sergio</span> González
             </h1>
-            <p class="text-xl text-dark-300">
+            <p class="text-sm sm:text-xl text-dark-300">
               Desarrollador <span class="font-semibold text-dark-200"
                 >Full Stack</span
               >
@@ -60,13 +60,13 @@ import Navbar from "../components/Navbar.astro";
             <div class="flex gap-4">
               <a
                 href="#portfolio"
-                class="inline-block px-6 py-3 bg-primary hover:bg-primary-600 text-primary-foreground rounded-lg transition-colors duration-300"
+                class="flex justify-center items-center text-xs sm:text-base text-nowrap px-3 py-1.5 sm:px-6 bg-primary hover:bg-primary-600 text-primary-foreground rounded-lg transition-colors duration-300"
               >
                 Ver Proyectos
               </a>
               <a
                 href="#contact"
-                class="inline-block px-6 py-3 border border-primary text-primary hover:bg-dark-700 hover:border-dark-100 hover:text-primary-foreground rounded-lg transition-colors duration-300"
+                class="flex justify-center items-center text-xs sm:text-base text-nowrap px-3 py-1.5 sm:px-6 sm:py-3 border border-primary text-primary hover:bg-dark-700 hover:border-dark-100 hover:text-primary-foreground rounded-lg transition-colors duration-300"
               >
                 Contactar
               </a>
