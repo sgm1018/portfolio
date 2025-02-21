@@ -25,7 +25,7 @@ import Navbar from "../components/Navbar.astro";
       background: radial-gradient(
         ellipse at center,
         transparent 60%,
-        var(--background) 100%
+        currentColor 100%
       );
       pointer-events: none; /* Para que no interfiera con otros elementos */
     }
@@ -74,8 +74,9 @@ import Navbar from "../components/Navbar.astro";
           </div>
           <div class="relative hidden sm:block sm:w-56 sm:h-56 md:w-96 md:h-60 lg:w-96 lg:h-80 xl:w-96 xl:h-96 2xl:w-96 2xl:h-full">
             <div
-              class="background-image object-cover w-full h-full rounded-lg overflow-hidden"
+              class="background-image text-background object-cover w-full h-full rounded-lg overflow-hidden"
             >
+
               <img
                 src="/avatar-bg.png"
                 alt="Your Name"
