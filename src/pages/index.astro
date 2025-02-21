@@ -43,7 +43,6 @@ import Navbar from "../components/Navbar.astro";
   </style>
   <main class="pt-20">
     <!-- Hero -->
-    <!-- Hero -->
     <section id="home" class="min-h-screen flex items-center justify-center">
       <div class="container flex justify-center items-center mx-auto px-6 py-12">
         <div class="flex flex-row flex-nowrap gap-20 items-center just">
@@ -297,7 +296,7 @@ import Navbar from "../components/Navbar.astro";
                 <div
                   class={`${index !== array.length - 1 ? "timeline-line" : ""}`}
                 >
-                  <div class="bg-dark-800 p-6 rounded-lg border border-dark-700">
+                  <div class="bg-dark-800 p-6 rounded-lg border border-dark-700 hover:border-primary transition-colors duration-300">
                     <span class="text-primary font-medium">{exp.period}</span>
                     <h3 class="text-xl font-bold mt-2">{exp.position}</h3>
                     <p class="text-dark-300 mt-1">{exp.company}</p>
@@ -390,7 +389,7 @@ import Navbar from "../components/Navbar.astro";
             <img src={edu.image} alt={edu.institution} class="h-[200px] object-contain rounded-lg" />
           </div>
           <div class="w-full md:w-2/3">
-            <div class="bg-dark-800 p-6 rounded-lg border border-dark-700">
+            <div class="bg-dark-800 p-6 rounded-lg border border-dark-700 hover:border-primary transition-colors duration-300">
             <h3 class="text-xl font-bold mt-2">{edu.degree}</h3>
             <p class="text-dark-300 mt-1">{edu.institution}</p>
             <p class="text-dark-400 mt-4">{edu.description}</p>
