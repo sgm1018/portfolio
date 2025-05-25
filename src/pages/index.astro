@@ -9,11 +9,10 @@ import Navbar from "../components/Navbar.astro";
     .background-image {
       position: relative;
       width: 20vw;
-      height: 100%; /* altura completa de la pantalla, ajústala según necesites */
+      height: 100%;
       background-size: cover;
     }
 
-    /* Pseudo-elemento para el gradiente de suavizado */
     .background-image::after {
       content: "";
       position: absolute;
@@ -21,13 +20,12 @@ import Navbar from "../components/Navbar.astro";
       left: 0;
       right: 0;
       bottom: 0;
-      /* Gradiente radial que va de transparente en el centro a el color de fondo en los bordes */
       background: radial-gradient(
         ellipse at center,
         transparent 60%,
         currentColor 100%
       );
-      pointer-events: none; /* Para que no interfiera con otros elementos */
+      pointer-events: none;
     }
 
     .background-image::before {
@@ -36,11 +34,39 @@ import Navbar from "../components/Navbar.astro";
       bottom: 0;
       left: 0;
       right: 0;
-      height: 25%; /* Ajusta la altura del gradiente */
+      height: 25%;
       background: linear-gradient(to bottom, transparent, var(--background));
       pointer-events: none;
     }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 2rem;
+    }
+
+    .tech-item {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .portfolio-item {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
+
   <main class="pt-20">
     <!-- Hero -->
     <section id="home" class="min-h-screen flex items-center justify-center">
@@ -76,7 +102,6 @@ import Navbar from "../components/Navbar.astro";
             <div
               class="background-image text-background object-cover w-full h-full rounded-lg overflow-hidden"
             >
-
               <img
                 src="/avatar-bg.png"
                 alt="Your Name"
@@ -165,101 +190,101 @@ import Navbar from "../components/Navbar.astro";
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {
             [
-                {
+              {
                 title: "GitLLMTrainer",
-                description:
-                  "Herramienta para scrapear repositorios de GitHub y generar conjuntos de datos para entrenar LLMs.",
+                description: "Herramienta para scrapear repositorios de GitHub y generar conjuntos de datos para entrenar LLMs.",
                 image: "/LLMICON.png",
                 tags: ["Python"],
                 demo: "https://github.com/sgm1018/GitLLMTrainer",
                 github: "https://github.com/sgm1018/GitLLMTrainer",
-                },
-                {
+              },
+              {
                 title: "Web App builder",
                 description: "Generador de aplicaciones web completas con base de datos, API, UI moderna, autentificacion con token JWT, chat, gestión de roles y despliegue.",
                 image: "/builder.png",
                 tags: [".NET", "Angular", "Docker", "WebSockets", "JWT", "Mongo DB", "Tailwind CSS"],
                 demo: "https://github.com/tfgsergiogonzalezmartinez/stack_generador",
                 github: "https://github.com/tfgsergiogonzalezmartinez/stack_generador",
-                },
-                {
+              },
+              {
                 title: "Star Repo Graph",
                 description: "Aplicación para capturar stars de repositorios de GitHub y generar gráficos elegantes.",
                 image: "/stars.png",
                 tags: ["Astro", "Redis", "Tailwind CSS"],
                 demo: "https://github.com/sgm1018/star-repo-graph",
                 github: "https://github.com/sgm1018/star-repo-graph",
-                },
-                {
+              },
+              {
                 title: "TeacherCloud",
                 description: "Plataforma de gestión de cursos en línea para profesores y estudiantes.",
                 image: "/teachercloud.png",
                 tags: ["Spring Boot", "Angular", "MySQL", "Docker", "Tailwind CSS"],
                 demo: "https://github.com/sgm1018/TeacherCloud/tree/desarrollo",
                 github: "https://github.com/sgm1018/TeacherCloud/tree/desarrollo",
-                }
+              }
             ].map((project) => (
-                <div class="bg-dark-800 rounded-lg overflow-hidden border border-dark-700 hover:border-primary transition-colors duration-300 cursor-pointer flex flex-col justify-between">
+              <div class="portfolio-item bg-dark-800 rounded-lg overflow-hidden border border-dark-700 hover:border-primary transition-colors duration-300 cursor-pointer flex flex-col justify-between">
                 <div class="aspect-video bg-dark-700 h-[300px]">
                   <img
-                  src={project.image}
-                  alt={project.title}
-                  class="w-full h-full object-cover"
-                  style="object-fit: cover; width: 100%; height: 100%;"
+                    src={project.image}
+                    alt={project.title}
+                    class="w-full h-full object-cover"
+                    style="object-fit: cover; width: 100%; height: 100%;"
+                    loading="lazy"
                   />
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
                   <div class="flex flex-col flex-grow">
-                  <h3 class="text-xl font-bold mb-2">{project.title}</h3> 
-                  <p class="text-dark-300 mb-4">{project.description}</p>
-                  <div class="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                    <span class="px-2 py-1 bg-dark-700 rounded text-xs text-dark-300">
-                      {tag}
-                    </span>
-                    ))}
-                  </div>
+                    <h3 class="text-xl font-bold mb-2">{project.title}</h3>
+                    <p class="text-dark-300 mb-4">{project.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag) => (
+                        <span class="px-2 py-1 bg-dark-700 rounded text-xs text-dark-300">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                   <div class="flex gap-4 mt-auto">
-                  <a
-                    href={project.demo}
-                    class="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors duration-300"
-                  >
-                    <span class="inline-block">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="w-5 h-5"
+                    <a
+                      href={project.demo}
+                      class="flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors duration-300"
                     >
-                      <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
-                    </svg>
-                    </span>
-                    <span>Demo</span>
-                  </a>
-                  <a
-                    href={project.github}
-                    class="flex items-center gap-2 text-primary hover:text-primary-400 transition-colors duration-300"
-                  >
-                    <span class="inline-block">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      class="w-5 h-5"
+                      <span class="inline-block">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          class="w-5 h-5"
+                        >
+                          <path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653Z" />
+                        </svg>
+                      </span>
+                      <span>Demo</span>
+                    </a>
+                    <a
+                      href={project.github}
+                      class="flex items-center gap-2 text-primary hover:text-primary-400 transition-colors duration-300"
                     >
-                      <path
-                      fill-rule="evenodd"
-                      d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
-                      clip-rule="evenodd"
-                      />
-                    </svg>
-                    </span>
-                    <span>GitHub</span>
-                  </a>
+                      <span class="inline-block">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          class="w-5 h-5"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                      <span>GitHub</span>
+                    </a>
                   </div>
                 </div>
-                </div>
+              </div>
             ))
           }
         </div>
@@ -311,7 +336,7 @@ import Navbar from "../components/Navbar.astro";
       </div>
     </section>
 
-    <!-- Technologies  -->
+    <!-- Technologies -->
     <section id="technologies" class="py-20">
       <div class="container mx-auto px-6">
         <div class="text-center mb-16">
@@ -321,9 +346,7 @@ import Navbar from "../components/Navbar.astro";
           </p>
         </div>
 
-        <div
-          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 justify-items-center"
-        >
+        <div class="tech-grid">
           {
             [
               { name: "JavaScript", icon: "devicon-javascript-plain" },
@@ -354,7 +377,7 @@ import Navbar from "../components/Navbar.astro";
               { name: "Google Cloud", icon: "devicon-googlecloud-plain" },
               { name: "AWS", icon: "devicon-amazonwebservices-plain" },
             ].map((tech) => (
-              <div class="tech-icon cursor-pointer" title={tech.name}>
+              <div class="tech-icon tech-item" title={tech.name}>
                 <i class={tech.icon} />
               </div>
             ))
@@ -362,7 +385,6 @@ import Navbar from "../components/Navbar.astro";
         </div>
       </div>
     </section>
-
 
     <!-- Education -->
     <section id="education" class="py-20">
@@ -484,3 +506,28 @@ import Navbar from "../components/Navbar.astro";
     </footer>
   </main>
 </Layout>
+
+<script>
+  function animateItems(selector: string, delay: number = 100) {
+    const items = document.querySelectorAll(selector);
+    items.forEach((item, index) => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              item.style.animation = `fadeInUp 0.6s ease-out forwards`;
+            }, index * delay);
+            observer.unobserve(item);
+          }
+        });
+      });
+      observer.observe(item);
+    });
+  }
+
+  // Initialize animations
+  document.addEventListener('DOMContentLoaded', () => {
+    animateItems('.tech-item', 100);
+    animateItems('.portfolio-item', 200);
+  });
+</script>

@@ -73,10 +73,18 @@ const {
     :global(html) {
       scroll-behavior: auto;
     }
+
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   .tech-icon {
     @apply w-20 h-20 rounded-full flex items-center justify-center bg-dark-800 border-2 border-dark-700 transition-all duration-300;
+    animation: fadeIn 0.6s ease-out;
   }
 
   .tech-icon i {
@@ -85,6 +93,7 @@ const {
 
   .tech-icon:hover {
     @apply border-primary;
+    transform: translateY(-5px);
   }
 
   .tech-icon:hover i {
@@ -94,10 +103,146 @@ const {
   .timeline-dot::before {
     content: '';
     @apply absolute w-3 h-3 bg-primary rounded-full left-0 top-2 -translate-x-1/2;
+    animation: pulse 2s infinite;
   }
 
   .timeline-line::after {
     content: '';
     @apply absolute w-0.5 bg-dark-700 left-0 top-5 bottom-0 -translate-x-1/2;
+    animation: growDown 1s ease-out forwards;
+    transform-origin: top center;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1) translateX(-50%);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2) translateX(-40%);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1) translateX(-50%);
+      opacity: 1;
+    }
+  }
+
+  @keyframes growDown {
+    from {
+      transform: scaleY(0) translateX(-50%);
+    }
+    to {
+      transform: scaleY(1) translateX(-50%);
+    }
+  }
+
+  /* Lazy loading and skeleton styles */
+  .lazy-image {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .lazy-image.loaded {
+    opacity: 1;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--dark-800) 0%,
+      var(--dark-700) 50%,
+      var(--dark-800) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+
+  /* Smooth section transitions */
+  section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Button animations */
+  .btn-primary {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.6s, opacity 0.6s;
+  }
+
+  .btn-primary:active::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transition: 0s;
   }
 </style>
+
+<script>
+  // Intersection Observer for section animations
+  const sections = document.querySelectorAll('section');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // Lazy loading for images
+  const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+  
+  lazyImages.forEach(img => {
+    img.classList.add('lazy-image');
+    img.addEventListener('load', () => {
+      img.classList.add('loaded');
+    });
+  });
+</script>
