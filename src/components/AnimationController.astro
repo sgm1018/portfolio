@@ -1,0 +1,463 @@
+---
+// AnimationController.astro - Controlador global de animaciones GSAP
+---
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  // Registrar plugins
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Variables globales
+  let animationsInitialized = false;
+
+  // Configuración global de ScrollTrigger
+  ScrollTrigger.config({
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load"
+  });
+
+  // Función principal para inicializar animaciones
+  function initializeAnimations() {
+    if (animationsInitialized) return;
+    animationsInitialized = true;
+
+    console.log('🎬 Initializing GSAP animations');
+
+    // Proteger header de animaciones
+    gsap.set('header', { clearProps: 'all' });
+
+    // Animaciones de entrada para secciones
+    initializeSectionAnimations();
+    
+    // Animaciones para cards y elementos
+    initializeCardAnimations();
+    
+    // Animaciones para tecnologías
+    initializeTechAnimations();
+    
+    // Animaciones para timeline
+    initializeTimelineAnimations();
+
+    // Parallax y efectos avanzados
+    initializeAdvancedEffects();
+
+    console.log('✨ All animations initialized');
+  }
+
+  // Animaciones de secciones principales
+  function initializeSectionAnimations() {
+    const sections = document.querySelectorAll('section:not(#home)');
+    
+    sections.forEach((section, index) => {
+      const title = section.querySelector('h2');
+      const subtitle = section.querySelector('p');
+      
+      if (title) {
+        gsap.fromTo(title, 
+          { 
+            opacity: 0, 
+            y: 50,
+            scale: 0.95
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "top 50%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      }
+
+      if (subtitle) {
+        gsap.fromTo(subtitle,
+          {
+            opacity: 0,
+            y: 30
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      }
+    });
+  }
+
+  // Animaciones para cards (servicios, portfolio) - sin bouncing
+  function initializeCardAnimations() {
+    const cards = document.querySelectorAll('[class*="grid"] > div, .portfolio-item, .service-card');
+    
+    cards.forEach((card, index) => {
+      gsap.fromTo(card,
+        {
+          opacity: 0,
+          y: 30
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: index * 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Hover effects suaves sin bouncing
+      card.addEventListener('mouseenter', () => {
+        gsap.to(card, {
+          y: -5,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+  }
+
+  // Animaciones para tecnologías con scroll infinito
+  function initializeTechAnimations() {
+    const techRows = document.querySelectorAll('.tech-row');
+    
+    if (techRows.length > 0) {
+      // Animación de aparición escalonada de las filas
+      techRows.forEach((row, index) => {
+        gsap.fromTo(row, 
+          { 
+            opacity: 0, 
+            y: 50 
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: index * 0.3,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: row,
+              start: "top 90%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      });
+
+      // Configurar animación infinita para cada fila
+      setupInfiniteScroll();
+    }
+  }
+
+  // Configurar scroll infinito para las filas de tecnologías
+  function setupInfiniteScroll() {
+    const leftToRightRows = document.querySelectorAll('.tech-row-ltr .tech-track');
+    const rightToLeftRows = document.querySelectorAll('.tech-row-rtl .tech-track');
+
+    // Filas de izquierda a derecha
+    leftToRightRows.forEach(track => {
+      const icons = track.querySelectorAll('.tech-icon-item');
+      const trackWidth = track.scrollWidth / 2; // Dividir por 2 porque duplicamos
+      
+      gsap.to(track, {
+        x: -trackWidth,
+        duration: 30,
+        ease: "none",
+        repeat: -1
+      });
+    });
+
+    // Filas de derecha a izquierda
+    rightToLeftRows.forEach(track => {
+      const icons = track.querySelectorAll('.tech-icon-item');
+      const trackWidth = track.scrollWidth / 2;
+      
+      gsap.fromTo(track, 
+        { x: -trackWidth },
+        {
+          x: 0,
+          duration: 30,
+          ease: "none",
+          repeat: -1
+        }
+      );
+    });
+  }
+
+  // Animaciones para timeline de experiencia
+  function initializeTimelineAnimations() {
+    const timelineItems = document.querySelectorAll('.timeline-dot');
+    
+    timelineItems.forEach((item, index) => {
+      gsap.fromTo(item,
+        {
+          opacity: 0,
+          x: -100
+        },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          delay: index * 0.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+  }
+
+  // Efectos avanzados y parallax
+  function initializeAdvancedEffects() {
+    // Parallax para backgrounds
+    const parallaxElements = document.querySelectorAll('[class*="bg-dark"]');
+    
+    parallaxElements.forEach(element => {
+      gsap.fromTo(element, 
+        { y: -50 },
+        {
+          y: 50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: element,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+          }
+        }
+      );
+    });
+
+    // Efecto de reveal para textos largos
+    const revealTexts = document.querySelectorAll('p, .hero-description');
+    
+    revealTexts.forEach(text => {
+      const words = text.textContent.split(' ');
+      text.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+      
+      const wordSpans = text.querySelectorAll('.word');
+      
+      gsap.set(wordSpans, { opacity: 0, y: 20 });
+      
+      ScrollTrigger.batch(wordSpans, {
+        onEnter: (elements) => {
+          gsap.to(elements, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            stagger: 0.02,
+            ease: "power2.out"
+          });
+        }
+      });
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(initializeAnimations, 100);
+  });
+
+  // Fallback
+  if (document.readyState !== 'loading') {
+    setTimeout(initializeAnimations, 100);
+  }
+</script>
+
+<style is:global>
+  /* Mejoras visuales globales */
+  
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Glassmorphism effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-dark {
+    background: rgba(26, 27, 30, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Gradient borders */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(135deg, #FF1E56, #FF5C84);
+    padding: 2px;
+    border-radius: 12px;
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: var(--dark-800);
+    border-radius: 10px;
+    z-index: -1;
+  }
+
+  /* Hover glow effects */
+  .glow-on-hover {
+    transition: all 0.3s ease;
+  }
+
+  .glow-on-hover:hover {
+    box-shadow: 0 0 20px rgba(255, 30, 86, 0.4);
+  }
+
+  /* Text animations */
+  .word {
+    display: inline-block;
+    margin-right: 0.25em;
+  }
+
+  /* Card improvements */
+  .enhanced-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .enhanced-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 30, 86, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .enhanced-card:hover::before {
+    left: 100%;
+  }
+
+  .enhanced-card:hover {
+    border-color: rgba(255, 30, 86, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Timeline improvements */
+  .timeline-line {
+    position: relative;
+  }
+
+  .timeline-line::after {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0;
+    bottom: -3rem;
+    width: 2px;
+    background: linear-gradient(180deg, #FF1E56, transparent);
+  }
+
+  .timeline-dot::before {
+    content: '';
+    position: absolute;
+    left: -2.5rem;
+    top: 1rem;
+    width: 12px;
+    height: 12px;
+    background: #FF1E56;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(26, 27, 30, 1), 0 0 0 6px rgba(255, 30, 86, 0.3);
+  }
+
+  /* Tech grid improvements */
+  .tech-icon {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tech-icon::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg, transparent, rgba(255, 30, 86, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .tech-icon:hover::after {
+    opacity: 1;
+  }
+
+  /* Button improvements */
+  .btn-enhanced {
+    position: relative;
+    overflow: hidden;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-enhanced:hover::before {
+    left: 100%;
+  }
+
+  /* Responsive improvements */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>

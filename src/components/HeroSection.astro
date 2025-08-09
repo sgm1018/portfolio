@@ -1,0 +1,370 @@
+---
+// HeroSection.astro
+---
+
+<script>
+  import { gsap } from 'gsap';
+
+  // Variables de control
+  let animationPlayed = false;
+  let scriptsLoaded = false;
+  let unicornInitialized = false;
+
+  // Unicorn Studio initialization (load first)
+  (function() {
+    if (!window.UnicornStudio) {
+      window.UnicornStudio = { isInitialized: false };
+      var script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
+      script.onload = function() {
+        if (!window.UnicornStudio.isInitialized) {
+          UnicornStudio.init();
+          window.UnicornStudio.isInitialized = true;
+          unicornInitialized = true;
+          console.log('Unicorn Studio initialized successfully');
+          checkAndPlayAnimation();
+        }
+      };
+      script.onerror = function() {
+        console.warn('Unicorn Studio failed to load, proceeding without it');
+        unicornInitialized = true;
+        checkAndPlayAnimation();
+      };
+      (document.head || document.body).appendChild(script);
+    } else {
+      unicornInitialized = true;
+      checkAndPlayAnimation();
+    }
+  })();
+
+  // Función para verificar si todo está listo y ejecutar animación
+  function checkAndPlayAnimation() {
+    if (scriptsLoaded && unicornInitialized && !animationPlayed) {
+      // Pequeño delay para asegurar que todo esté renderizado
+      setTimeout(() => {
+        playHeroAnimation();
+      }, 300);
+    }
+  }
+
+  // Función principal de animación
+  function playHeroAnimation() {
+    if (animationPlayed) return;
+    
+    console.log('Playing hero animation');
+    animationPlayed = true;
+    
+    // Crear timeline principal
+    const tl = gsap.timeline({
+      onComplete: () => {
+        console.log('Hero animation completed');
+        setupHoverEffects();
+      }
+    });
+
+    // Resetear elementos a estado inicial
+    gsap.set(['.hero-name', '.hero-surname'], { 
+      y: 100, 
+      opacity: 0 
+    });
+    gsap.set('.hero-subtitle', { 
+      opacity: 0 
+    });
+    gsap.set('.hero-actions', { 
+      y: 30, 
+      opacity: 0 
+    });
+    gsap.set('.hero-actions a', { 
+      scale: 0.8 
+    });
+
+    // Secuencia de animación
+    tl.to('.hero-name', {
+      duration: 1.2,
+      y: 0,
+      opacity: 1,
+      ease: 'power3.out',
+    })
+    .to('.hero-surname', {
+      duration: 1.2,
+      y: 0,
+      opacity: 1,
+      ease: 'power3.out',
+    }, '-=0.8')
+    .to('.hero-subtitle', {
+      duration: 1,
+      opacity: 1,
+      ease: 'power2.out',
+    }, '-=0.6')
+    .to('.hero-actions', {
+      duration: 0.8,
+      y: 0,
+      opacity: 1,
+      ease: 'power2.out',
+    }, '-=0.3')
+    .to('.hero-actions a', {
+      duration: 0.6,
+      scale: 1,
+      stagger: 0.1,
+      ease: 'back.out(1.7)',
+      transformOrigin: 'center',
+    }, '-=0.5');
+  }
+
+  // Configurar efectos hover (solo después de la animación inicial)
+  function setupHoverEffects() {
+    const buttons = document.querySelectorAll('.btn-primary, .btn-secondary');
+    buttons.forEach(button => {
+      // Limpiar listeners existentes
+      button.removeEventListener('mouseenter', handleMouseEnter);
+      button.removeEventListener('mouseleave', handleMouseLeave);
+      
+      // Agregar nuevos listeners
+      button.addEventListener('mouseenter', handleMouseEnter);
+      button.addEventListener('mouseleave', handleMouseLeave);
+    });
+
+    // Animación de floating eliminada - solo efectos hover en botones
+    console.log('Hover effects configured');
+  }
+
+  // Handlers para hover
+  function handleMouseEnter(e) {
+    if (!animationPlayed) return;
+    gsap.to(e.target, {
+      duration: 0.3,
+      scale: 1.05,
+      ease: 'power2.out'
+    });
+  }
+
+  function handleMouseLeave(e) {
+    if (!animationPlayed) return;
+    gsap.to(e.target, {
+      duration: 0.3,
+      scale: 1,
+      ease: 'power2.out'
+    });
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    scriptsLoaded = true;
+    console.log('DOM loaded, checking animation conditions');
+    checkAndPlayAnimation();
+  });
+
+  // Fallback si DOM ya está cargado
+  if (document.readyState === 'loading') {
+    // DOM aún se está cargando
+  } else {
+    scriptsLoaded = true;
+    checkAndPlayAnimation();
+  }
+</script>
+
+<section id="home" class="hero-section">
+  <div 
+    data-us-project="qXzwo4j7zLc5XTCHu53t" 
+    class="hero-animation"
+  ></div>
+  
+  <!-- Hero Text Content -->
+  <div class="hero-content">
+    <div class="hero-text">
+      <h1 class="hero-title">
+        <span class="hero-name">Sergio González</span>
+        <span class="hero-surname">Martínez</span>
+      </h1>
+      <p class="hero-subtitle">
+        Desarrollador Full Stack & DevSecOps
+      </p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn-primary">Ver Proyectos</a>
+        <a href="#contact" class="btn-secondary">Contactar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    background: linear-gradient(
+      90deg, 
+      rgba(0, 0, 0, 0.7) 0%, 
+      rgba(0, 0, 0, 0.4) 50%, 
+      transparent 100%
+    );
+  }
+
+  .hero-text {
+    max-width: 600px;
+    color: white;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .hero-name,
+  .hero-surname {
+    display: block;
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  .hero-name {
+    background: linear-gradient(135deg, #FF1E56, #FF5C84);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 30, 86, 0.3);
+  }
+
+  .hero-surname {
+    color: #FFFFFF;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    margin-bottom: 2rem;
+    opacity: 0;
+  }
+
+  .hero-role {
+    color: #FFFFFF;
+    font-weight: 700;
+    display: block;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  .hero-speciality {
+    color: #FF1E56;
+    font-weight: 700;
+    display: block;
+    text-shadow: 0 0 20px rgba(255, 30, 86, 0.4);
+  }
+
+  .hero-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+    max-width: 500px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(30px);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    font-weight: 400;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-primary {
+    background: #FF1E56;
+    color: #FFFFFF;
+    border-color: #FF1E56;
+    box-shadow: 0 4px 15px rgba(255, 30, 86, 0.4);
+  }
+
+  .btn-primary:hover {
+    background: #FFFFFF;
+    color: #FF1E56;
+    border-color: #FF1E56;
+    box-shadow: 0 8px 25px rgba(255, 30, 86, 0.3);
+  }
+
+  .btn-secondary {
+    background: #FFFFFF;
+    color: #1A1B1E;
+    border-color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-secondary:hover {
+    background: #1A1B1E;
+    color: #FFFFFF;
+    border-color: #FFFFFF;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .hero-content {
+      padding: 0 1rem;
+    }
+    
+    .hero-text {
+      text-align: center;
+    }
+    
+    .hero-title {
+      font-size: clamp(2.5rem, 10vw, 4rem);
+    }
+    
+    .hero-actions {
+      justify-content: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>

@@ -9,16 +9,16 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-dark-900/80 backdrop-blur-sm border-b border-dark-700">
-  <nav class="container mx-auto px-6 py-4">
+<header class="fixed top-0! left-0! right-0! z-50 bg-dark-900/20 backdrop-blur-md border-b border-white/10 shadow-lg" style="margin: 0 !important; padding: 0 !important; position: fixed !important; top: 0 !important;">
+  <nav class="container mx-auto px-6 py-2">
     <div class="flex items-center justify-between">
-      <a href="#home" class="text-2xl font-bold text-white animate-[fadeIn_0.5s_ease-out_0.2s_forwards]">
+      <a href="#home" class="text-2xl font-bold text-white">
         <img class="w-28" src="/sgm-logo-primary.png" alt=""> 
       </a>
       
       <ul class="hidden md:flex items-center gap-8">
         {navItems.map((item, index) => ( 
-          <li class={`animate-[fadeIn_0.5s_ease-out_${(index + 1) * 0.1 + 0.2}s_forwards]`}>
+          <li>
             <a
               href={item.href}
               class="text-white hover:text-primary transition-colors duration-300 relative after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full"
@@ -53,7 +53,7 @@ const navItems = [
     <!-- Mobile Menu -->
     <div
       id="mobile-menu"
-      class="md:hidden hidden absolute top-full left-0 right-0 bg-dark-800 border-b border-dark-700 transform transition-all duration-300 opacity-0 -translate-y-4"
+      class="md:hidden hidden absolute top-full left-0 right-0 bg-dark-900/30 backdrop-blur-md border-b border-white/10 transition-opacity duration-300 opacity-0"
     >
       <ul class="container mx-auto px-6 py-4 space-y-4">
         {navItems.map((item) => (
@@ -82,12 +82,10 @@ const navItems = [
         // Show menu
         setTimeout(() => {
           mobileMenu.style.opacity = '1';
-          mobileMenu.style.transform = 'translateY(0)';
         }, 10);
       } else {
         // Hide menu
         mobileMenu.style.opacity = '0';
-        mobileMenu.style.transform = 'translateY(-1rem)';
       }
     });
 
@@ -96,8 +94,20 @@ const navItems = [
       link.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
         mobileMenu.style.opacity = '0';
-        mobileMenu.style.transform = 'translateY(-1rem)';
       });
     });
   }
 </script>
+
+<style>
+  header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    translate: none !important;
+  }
+</style>
