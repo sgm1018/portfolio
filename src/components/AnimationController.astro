@@ -50,8 +50,13 @@
     const sections = document.querySelectorAll('section:not(#home)');
     
     sections.forEach((section, index) => {
+      // Excluir elementos del formulario de contacto
+      const isContactSection = section.id === 'contact';
+      
       const title = section.querySelector('h2');
-      const subtitle = section.querySelector('p');
+      const subtitle = isContactSection ? 
+        section.querySelector('p:not(#contact-form p):not(#contact-form *)') : 
+        section.querySelector('p');
       
       if (title) {
         gsap.fromTo(title, 
@@ -101,9 +106,14 @@
 
   // Animaciones para cards (servicios, portfolio) - sin bouncing
   function initializeCardAnimations() {
-    const cards = document.querySelectorAll('[class*="grid"] > div, .portfolio-item, .service-card');
+    const cards = document.querySelectorAll('[class*="grid"] > div:not(#contact-form *):not(#contact div), .portfolio-item, .service-card');
     
     cards.forEach((card, index) => {
+      // Excluir elementos dentro del formulario de contacto
+      if (card.closest('#contact-form') || card.closest('form')) {
+        return;
+      }
+      
       gsap.fromTo(card,
         {
           opacity: 0,
@@ -123,22 +133,24 @@
         }
       );
 
-      // Hover effects suaves sin bouncing
-      card.addEventListener('mouseenter', () => {
-        gsap.to(card, {
-          y: -5,
-          duration: 0.3,
-          ease: "power2.out"
+      // Hover effects suaves sin bouncing (excluir inputs/form elements)
+      if (!card.matches('input, textarea, button, label, form')) {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            y: -5,
+            duration: 0.3,
+            ease: "power2.out"
+          });
         });
-      });
 
-      card.addEventListener('mouseleave', () => {
-        gsap.to(card, {
-          y: 0,
-          duration: 0.3,
-          ease: "power2.out"
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out"
+          });
         });
-      });
+      }
     });
   }
 
@@ -256,8 +268,8 @@
       );
     });
 
-    // Efecto de reveal para textos largos
-    const revealTexts = document.querySelectorAll('p, .hero-description');
+    // Efecto de reveal para textos largos (excluyendo formularios)
+    const revealTexts = document.querySelectorAll('p:not(#contact-form p):not(#contact-form label):not(#contact *), .hero-description');
     
     revealTexts.forEach(text => {
       const words = text.textContent.split(' ');

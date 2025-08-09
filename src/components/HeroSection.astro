@@ -188,8 +188,13 @@
 </section>
 
 <style>
+  /* Prevent horizontal overflow */
+  body {
+    overflow-x: hidden;
+  }
+
   .hero-section {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     position: relative;
     overflow: hidden;
@@ -206,6 +211,8 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   .hero-content {
@@ -215,7 +222,8 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    max-width: 100%;
+    overflow: hidden;
     background: linear-gradient(
       90deg, 
       rgba(0, 0, 0, 0.7) 0%, 
@@ -226,7 +234,10 @@
 
   .hero-text {
     max-width: 600px;
+    width: 100%;
+    padding: 0 2rem;
     color: white;
+    box-sizing: border-box;
   }
 
   .hero-title {
