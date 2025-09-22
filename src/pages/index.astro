@@ -2,786 +2,174 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import HeroSection from "../components/HeroSection.astro";
-import AnimationController from "../components/AnimationController.astro";
+import AboutSection from "../components/sections/AboutSection.astro";
+import ServicesSection from "../components/sections/ServicesSection.astro";
+import ProjectsSection from "../components/sections/ProjectsSection.astro";
+import TechStackSection from "../components/sections/TechStackSection.astro";
+import ExperienceSection from "../components/sections/ExperienceSection.astro";
+import ContactSection from "../components/sections/ContactSection.astro";
+import ScrollReveal from "../components/animations/ScrollReveal.astro";
 ---
 
-<Layout title="Sergio González Martínez - Portfolio">
+<Layout title="Sergio González Martínez - Full Stack DevSecOps Developer">
   <Navbar />
-  <AnimationController />
-  <style>
-    .enhanced-card {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 1.5rem;
-      transition:     </section>
-
-    <section id="contact" class="py-32 relative overflow-hidden">0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .tech-row {
-      position: relative;
-      width: 100%;
-      height: 80px;
-      overflow: hidden;
-      mask: linear-gradient(
-        90deg,
-        transparent,
-        white 10%,
-        white 90%,
-        transparent
-      );
-      -webkit-mask: linear-gradient(
-        90deg,
-        transparent,
-        white 10%,
-        white 90%,
-        transparent
-      );
-    }
-
-    .tech-track {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      white-space: nowrap;
-      will-change: transform;
-    }
-
-    .tech-icon-item {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 80px;
-      height: 64px;
-      flex-shrink: 0;
-      position: relative;
-    }
-
-    .tech-icon-item i {
-      transition: color 0.3s ease;
-    }
-
-    .enhanced-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 30, 86, 0.1), transparent);
-      transition: left 0.6s ease;
-    }
-
-    .enhanced-card:hover::before {
-      left: 100%;
-    }
-
-    .tech-icon {
-      position: relative;
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .service-card {
-      padding: 0;
-    }
-
-    .portfolio-item {
-      background: linear-gradient(135deg, rgba(26, 27, 30, 0.9) 0%, rgba(26, 27, 30, 0.8) 100%);
-    }
-
-    @media (max-width: 768px) {
-      .enhanced-card {
-        padding: 1.5rem;
-      }
-    }
-  </style>
-
-  <main>
+  
+  <main class="relative">
+    <!-- Hero Section -->
     <HeroSection />
-
-    <section id="services" class="py-20 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900"></div>
-      <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23FF1E56\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"4\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-20">
-          <div class="inline-flex items-center gap-3 mb-6">
-            <div class="w-12 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
-            <span class="text-primary font-semibold tracking-widest uppercase text-sm">Servicios</span>
-            <div class="w-12 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
-          </div>
-          <h2 class="text-6xl font-black mb-6 text-white">
-            ¿Cómo puedo <span class="text-primary">ayudarte?</span>
-          </h2>
-          <p class="text-dark-200 text-xl max-w-3xl mx-auto leading-relaxed">
-            Ofrezco soluciones completas, desde la estructuración del proyecto, construcción y su despliegue, siguiendo las mejores técnicas SDLC para un desarrollo seguro.
-          </p>
-        </div>
-
-        <div class="space-y-8">
-          {
-            [
-              {
-                number: "01",
-                title: "Desarrollo Web Full Stack",
-                description: "Aplicaciones web completas con arquitecturas modernas, APIs robustas y interfaces de usuario excepcionales.",
-                features: ["Frontend Moderno", "APIs RESTful", "Bases de Datos", "UI/UX Design"],
-                color: "from-primary/20 to-primary-600/20",
-                icon: "🌐"
-              },
-              {
-                number: "02", 
-                title: "DevSecOps & Cloud",
-                description: "Automatización de despliegues, infraestructura como código y implementación de prácticas de seguridad desde el desarrollo.",
-                features: ["SDLC", "SAST", "DAST", "Docker", "Kubernetes", "HELM", "CI/CD Pipelines", "Containerización", "Security First"],
-                color: "from-primary/20 to-primary-600/20",
-                icon: "🚀"
-              },
-              {
-                number: "03",
-                title: "Consultoría Técnica",
-                description: "Asesoramiento estratégico en arquitectura de software, selección de tecnologías y optimización de procesos de desarrollo.",
-                features: ["Arquitectura de Software", "Code Reviews", "Tech Stack", "Best Practices"],
-                color: "from-primary/20 to-primary-600/20", 
-                icon: "💡"
-              },
-              {
-                number: "04",
-                title: "Aplicaciones Móviles",
-                description: "Desarrollo de aplicaciones nativas y multiplataforma para iOS y Android con rendimiento óptimo.",
-                features: ["React Native", "Flutter", "Native iOS/Android", "Cross-platform"],
-                color: "from-primary/20 to-primary-600/20",
-                icon: "📱"
-              }
-            ].map((service, index) => (
-              <div class={`service-card flex items-center gap-8 py-6 ${index % 2 === 1 ? 'flex-row-reverse' : ''}`}>
-                <div class="flex-shrink-0">
-                  <div class="relative">
-                    <span class="text-8xl font-black text-dark-700 select-none">{service.number}</span>
-                    <div class={`absolute -top-2 -left-2 w-20 h-20 rounded-full bg-gradient-to-r ${service.color} opacity-20 blur-xl`}></div>
-                  </div>
-                </div>
-
-                <div class="flex-1 min-w-0">
-                  <div class="bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm rounded-2xl p-8 border border-primary/20 hover:border-primary/40 transition-all duration-500">
-                    <div class="flex items-center gap-4 mb-4">
-                      <div class="w-12 h-12 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center text-xl">
-                        {service.icon}
-                      </div>
-                      <h3 class="text-2xl font-bold text-white">{service.title}</h3>
-                    </div>
-                    
-                    <p class="text-gray-300 text-lg mb-6 leading-relaxed">
-                      {service.description}
-                    </p>
-                    
-                    <div class="flex flex-wrap gap-3">
-                      {service.features.map((feature, featureIndex) => (
-                        <span class="px-4 py-2 rounded-full text-sm font-medium bg-primary/20 text-primary-200 border border-primary/30 hover:bg-primary/30 transition-colors">
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section id="portfolio" class="py-20 relative">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-20">
-          <h2 class="text-5xl font-black mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-            Mi <span class="bg-gradient-to-r from-primary to-primary-400 bg-clip-text text-transparent">Portfolio</span>
-          </h2>
-          <p class="text-dark-200 text-xl max-w-3xl mx-auto leading-relaxed">
-            Una selección de mis proyectos más recientes y destacados, donde combino innovación técnica con diseño excepcional
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {
-            [
-              {
-                title: "GitLLMTrainer",
-                description: "Herramienta para scrapear repositorios de GitHub y generar conjuntos de datos para entrenar LLMs.",
-                image: "/LLMICON.png",
-                tags: ["Python"],
-                demo: "https://github.com/sgm1018/GitLLMTrainer",
-                github: "https://github.com/sgm1018/GitLLMTrainer",
-                category: "AI/ML"
-              },
-              {
-                title: "Web App builder",
-                description: "Generador de aplicaciones web completas con base de datos, API, UI moderna, autentificacion con token JWT, chat, gestión de roles y despliegue.",
-                image: "/builder.png",
-                tags: [".NET", "Angular", "Docker", "WebSockets", "JWT", "Mongo DB", "Tailwind CSS"],
-                demo: "https://github.com/tfgsergiogonzalezmartinez/stack_generador",
-                github: "https://github.com/tfgsergiogonzalezmartinez/stack_generador",
-                category: "Full Stack"
-              },
-              {
-                title: "Star Repo Graph",
-                description: "Aplicación para capturar stars de repositorios de GitHub y generar gráficos elegantes.",
-                image: "/stars.png",
-                tags: ["Astro", "Redis", "Tailwind CSS"],
-                demo: "https://github.com/sgm1018/star-repo-graph",
-                github: "https://github.com/sgm1018/star-repo-graph",
-                category: "Data Viz"
-              },
-              {
-                title: "TeacherCloud",
-                description: "Plataforma de gestión de cursos en línea para profesores y estudiantes.",
-                image: "/teachercloud.png",
-                tags: ["Spring Boot", "Angular", "MySQL", "Docker", "Tailwind CSS"],
-                demo: "https://github.com/sgm1018/TeacherCloud/tree/desarrollo",
-                github: "https://github.com/sgm1018/TeacherCloud/tree/desarrollo",
-                category: "Education"
-              }
-            ].map((project, index) => (
-              <div class="portfolio-item enhanced-card group overflow-hidden cursor-pointer relative">
-                <div class="absolute top-4 left-4 z-20 bg-gradient-to-r from-primary to-primary-400 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide">
-                  {project.category}
-                </div>
-                
-                <div class="relative aspect-video bg-dark-700 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    class="w-full h-full object-cover transition-all duration-500"
-                    loading="lazy"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div class="flex gap-4">
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        class="bg-primary/90 backdrop-blur-sm text-white px-6 py-3 rounded-full font-semibold hover:bg-primary transition-colors duration-300 flex items-center gap-2 shadow-lg"
-                      >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                        </svg>
-                        Demo
-                      </a>
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        class="bg-dark-800/90 backdrop-blur-sm text-white px-6 py-3 rounded-full font-semibold hover:bg-dark-700 transition-colors duration-300 flex items-center gap-2 shadow-lg border border-gray-600"
-                      >
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0110 4.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0020 10.017C20 4.484 15.522 0 10 0z" clip-rule="evenodd"/>
-                        </svg>
-                        Code
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                
-                <div class="p-6 flex flex-col flex-grow">
-                  <h3 class="text-xl font-bold mb-3 text-white group-hover:text-primary transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p class="text-dark-300 mb-4 leading-relaxed group-hover:text-dark-200 transition-colors duration-300">
-                    {project.description}
-                  </p>
-                  
-                  <div class="flex flex-wrap gap-2 mt-auto">
-                    {project.tags.map((tag, tagIndex) => (
-                      <span class="px-3 py-1.5 rounded-full text-xs font-semibold bg-primary/15 text-primary-200 border border-primary/25 hover:bg-primary/25 hover:text-primary-100 transition-all duration-300 backdrop-blur-sm">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" class="py-20 bg-dark-800/50">
-      <div class="container mx-auto px-6">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold mb-4">Experiencia <span class="text-primary">Profesional</span> </h2>
-          <p class="text-dark-300 max-w-2xl mx-auto">
-            Mi trayectoria profesional
-          </p>
-        </div>
-
-        <div class="max-w-3xl mx-auto">
-          {
-            [
-              {
-                period: "2024 - Presente",
-                company: "TCH Labs",
-                position: "Full Stack DevSecOps developer",
-                description:
-                  "Diseño y desarrollo de APIs avanzadas con seguridad robusta, interfaces modernas con Angular y Astro, despliegue en Kubernetes, optimización con Redis y Memcached, y creación de aplicaciones complejas. Implementación de pipelines CI/CD con GitLab. Experiencia en visión artificial, robótica, control de almacenes automáticos, y modelos de lenguaje (LLMs, RAG, Fine-tuning). Conocimientos avanzados en frontend (Angular, Astro, Tailwind CSS), backend (APIs REST, SOAP, MQTT, SQL/NoSQL, .NET, Nest), DevSecOps (Apache, Nginx, Docker, Kubernetes, CI/CD, Ansible y Terraform), y robótica (AGVs, ROS2, LIDAR).",
-              },{
-              period: "2023 - 2024",
-                company: "CSA - Centro Regional de Servicios Avanzados",
-                position: "DevSecOps",
-                description:
-                  "Especializado en despliegues seguros con Docker con un perfil DevSecOps en el departamento de ciberseguridad. he participado, desarrollado y desplegado aplicaciones con un importante enfoque en la seguridad",
-              },
-            ].map((exp, index, array) => (
-              <div class="relative pl-10 pb-12 timeline-dot last:pb-0">
-                <div
-                  class={`${index !== array.length - 1 ? "timeline-line" : ""}`}
-                >
-                  <div class="bg-dark-800 p-6 rounded-lg border border-dark-700 hover:border-primary transition-colors duration-300">
-                    <span class="text-primary font-medium">{exp.period}</span>
-                    <h3 class="text-xl font-bold mt-2">{exp.position}</h3>
-                    <p class="text-dark-300 mt-1">{exp.company}</p>
-                    <p class="text-dark-400 mt-4">{exp.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section id="technologies" class="py-20 relative overflow-hidden bg-dark-900">
-      <div class="absolute inset-0 bg-gradient-to-b from-dark-800 via-dark-900 to-dark-800"></div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-20">
-          <div class="inline-flex items-center gap-3 mb-6">
-            <div class="w-12 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
-            <span class="text-primary font-semibold tracking-widest uppercase text-sm">Tecnologías</span>
-            <div class="w-12 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
-          </div>
-          <h2 class="text-6xl font-black mb-6 text-white">
-            Mi <span class="text-primary">Arsenal</span> Tecnológico
-          </h2>
-          <p class="text-dark-200 text-xl max-w-3xl mx-auto leading-relaxed">
-            Domino un amplio ecosistema de tecnologías modernas para crear soluciones robustas y escalables
-          </p>
-        </div>
-
-        <div class="space-y-12">
-          <div class="tech-row tech-row-ltr overflow-hidden">
-            <div class="tech-track flex gap-8 items-center">
-              {
-                [
-                  { name: "JavaScript", icon: "devicon-javascript-plain", color: "#FFFFFF" },
-                  { name: "TypeScript", icon: "devicon-typescript-plain", color: "#FF1E56" },
-                  { name: "React", icon: "devicon-react-original", color: "#FFFFFF" },
-                  { name: "Angular", icon: "devicon-angularjs-plain", color: "#FF1E56" },
-                  { name: "Vue.js", icon: "devicon-vuejs-plain", color: "#FFFFFF" },
-                  { name: "Astro", icon: "devicon-astro-plain", color: "#FF1E56" },
-                  { name: "Next.js", icon: "devicon-nextjs-original", color: "#FFFFFF" },
-                  { name: "Tailwind", icon: "devicon-tailwindcss-plain", color: "#FF1E56" },
-                  // Duplicamos para scroll infinito
-                  { name: "JavaScript", icon: "devicon-javascript-plain", color: "#FFFFFF" },
-                  { name: "TypeScript", icon: "devicon-typescript-plain", color: "#FF1E56" },
-                  { name: "React", icon: "devicon-react-original", color: "#FFFFFF" },
-                  { name: "Angular", icon: "devicon-angularjs-plain", color: "#FF1E56" },
-                  { name: "Vue.js", icon: "devicon-vuejs-plain", color: "#FFFFFF" },
-                  { name: "Astro", icon: "devicon-astro-plain", color: "#FF1E56" },
-                  { name: "Next.js", icon: "devicon-nextjs-original", color: "#FFFFFF" },
-                  { name: "Tailwind", icon: "devicon-tailwindcss-plain", color: "#FF1E56" }
-                ].map((tech, index) => (
-                  <div 
-                    class="tech-icon-item flex-shrink-0 bg-dark-800/60 backdrop-blur-sm rounded-xl p-4 border border-dark-700 hover:border-primary/50 transition-colors duration-300"
-                    title={tech.name}
-                  >
-                    <i 
-                      class={`${tech.icon} text-4xl`}
-                      style={`color: ${tech.color}`}
-                    />
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-
-          <div class="tech-row tech-row-rtl overflow-hidden">
-            <div class="tech-track flex gap-8 items-center">
-              {
-                [
-                  { name: "Python", icon: "devicon-python-plain", color: "#FFFFFF" },
-                  { name: ".NET", icon: "devicon-dotnetcore-plain", color: "#FF1E56" },
-                  { name: "Java", icon: "devicon-java-plain", color: "#FFFFFF" },
-                  { name: "Node.js", icon: "devicon-nodejs-plain", color: "#FF1E56" },
-                  { name: "Spring", icon: "devicon-spring-plain", color: "#FFFFFF" },
-                  { name: "NestJS", icon: "devicon-nestjs-plain", color: "#FF1E56" },
-                  { name: "Flask", icon: "devicon-flask-original", color: "#FFFFFF" },
-                  { name: "Express", icon: "devicon-express-original", color: "#000000" },
-                  // Duplicamos para scroll infinito
-                  { name: "Python", icon: "devicon-python-plain", color: "#FFFFFF" },
-                  { name: ".NET", icon: "devicon-dotnetcore-plain", color: "#FF1E56" },
-                  { name: "Java", icon: "devicon-java-plain", color: "#FFFFFF" },
-                  { name: "Node.js", icon: "devicon-nodejs-plain", color: "#FF1E56" },
-                  { name: "Spring", icon: "devicon-spring-plain", color: "#FFFFFF" },
-                  { name: "NestJS", icon: "devicon-nestjs-plain", color: "#FF1E56" },
-                  { name: "Flask", icon: "devicon-flask-original", color: "#FFFFFF" },
-                  { name: "Express", icon: "devicon-express-original", color: "#000000" }
-                ].map((tech, index) => (
-                  <div 
-                    class="tech-icon-item flex-shrink-0 bg-dark-800/60 backdrop-blur-sm rounded-xl p-4 border border-dark-700 hover:border-primary/50 transition-colors duration-300"
-                    title={tech.name}
-                  >
-                    <i 
-                      class={`${tech.icon} text-4xl`}
-                      style={`color: ${tech.color}`}
-                    />
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-
-          <div class="tech-row tech-row-ltr overflow-hidden">
-            <div class="tech-track flex gap-8 items-center">
-              {
-                [
-                  { name: "Docker", icon: "devicon-docker-plain", color: "#FFFFFF" },
-                  { name: "Kubernetes", icon: "devicon-kubernetes-plain", color: "#FF1E56" },
-                  { name: "MongoDB", icon: "devicon-mongodb-plain", color: "#FFFFFF" },
-                  { name: "PostgreSQL", icon: "devicon-postgresql-plain", color: "#FF1E56" },
-                  { name: "Redis", icon: "devicon-redis-plain", color: "#FF1E56" },
-                  { name: "AWS", icon: "devicon-amazonwebservices-plain", color: "#FFFFFF" },
-                  { name: "Google Cloud", icon: "devicon-googlecloud-plain", color: "#FF1E56" },
-                  { name: "Git", icon: "devicon-git-plain", color: "#FF1E56" },
-                  // Duplicamos para scroll infinito
-                  { name: "Docker", icon: "devicon-docker-plain", color: "#FFFFFF" },
-                  { name: "Kubernetes", icon: "devicon-kubernetes-plain", color: "#FF1E56" },
-                  { name: "MongoDB", icon: "devicon-mongodb-plain", color: "#FFFFFF" },
-                  { name: "PostgreSQL", icon: "devicon-postgresql-plain", color: "#FF1E56" },
-                  { name: "Redis", icon: "devicon-redis-plain", color: "#FF1E56" },
-                  { name: "AWS", icon: "devicon-amazonwebservices-plain", color: "#FFFFFF" },
-                  { name: "Google Cloud", icon: "devicon-googlecloud-plain", color: "#FF1E56" },
-                  { name: "Git", icon: "devicon-git-plain", color: "#FF1E56" }
-                ].map((tech, index) => (
-                  <div 
-                    class="tech-icon-item flex-shrink-0 bg-dark-800/60 backdrop-blur-sm rounded-xl p-4 border border-dark-700 hover:border-primary/50 transition-colors duration-300"
-                    title={tech.name}
-                  >
-                    <i 
-                      class={`${tech.icon} text-4xl`}
-                      style={`color: ${tech.color}`}
-                    />
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="py-20 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-dark-800 via-dark-900 to-dark-800"></div>
-      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,30,86,0.3) 1px, transparent 0); background-size: 30px 30px;"></div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="text-center mb-20">
-          <div class="inline-flex items-center gap-3 mb-6">
-            <div class="w-12 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
-            <span class="text-primary font-semibold tracking-widest uppercase text-sm">Educación</span>
-            <div class="w-12 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
-          </div>
-          <h2 class="text-6xl font-black mb-6 text-white">
-            Mi <span class="text-primary">Formación</span>
-          </h2>
-          <p class="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed">
-            Fundamentos sólidos en ingeniería de software y constante aprendizaje en tecnologías emergentes
-          </p>
-        </div>
-
-        <div class="max-w-5xl mx-auto">
-          <div class="bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm rounded-3xl overflow-hidden border border-primary/20 hover:border-primary/40 transition-all duration-500 shadow-2xl">
-            <div class="bg-gradient-to-r from-primary/20 to-primary/10 px-8 py-6 border-b border-primary/20">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                  <div class="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl p-3 border border-white/20 flex items-center justify-center">
-                    <img src="/ubu.svg" alt="Universidad de Burgos" class="w-full h-full object-contain" />
-                  </div>
-                  <div>
-                    <h3 class="text-3xl font-black text-white mb-1">
-                      Ingeniería Informática
-                    </h3>
-                    <p class="text-lg text-primary font-semibold">
-                      Universidad de Burgos (UBU)
-                    </p>
-                  </div>
-                </div>
-                
-                <div class="hidden md:flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-semibold border border-primary/30">
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0z"/>
-                  </svg>
-                  Graduado
-                </div>
-              </div>
-            </div>
-            
-            <div class="p-8">
-              <div class="mb-8">
-                <p class="text-gray-300 text-lg leading-relaxed">
-                  Formación integral en desarrollo de software, algoritmos, estructuras de datos, 
-                  ingeniería de software y arquitecturas distribuidas. Especialización en tecnologías 
-                  web modernas y metodologías ágiles de desarrollo.
-                </p>
-              </div>
-              
-              <!-- Skills organizadas en categorías -->
-              <div class="space-y-6">
-                <div>
-                  <h4 class="text-white font-semibold mb-3 text-lg">Competencias Principales</h4>
-                  <div class="flex flex-wrap gap-3">
-                    {[
-                      "Algoritmos y Estructuras de Datos",
-                      "Ingeniería de Software", 
-                      "Bases de Datos"
-                    ].map((skill) => (
-                      <span class="px-4 py-2 bg-primary/15 text-primary-200 rounded-full text-sm font-semibold border border-primary/25 hover:bg-primary/25 hover:text-primary-100 transition-all duration-300">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 class="text-white font-semibold mb-3 text-lg">Especialización Técnica</h4>
-                  <div class="flex flex-wrap gap-3">
-                    {[
-                      "Redes y Sistemas Distribuidos",
-                      "Programación Orientada a Objetos",
-                      "Metodologías Ágiles"
-                    ].map((skill) => (
-                      <span class="px-4 py-2 bg-primary/15 text-primary-200 rounded-full text-sm font-semibold border border-primary/25 hover:bg-primary/25 hover:text-primary-100 transition-all duration-300">
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              <!-- Stats o información adicional -->
-              <div class="mt-8 pt-8 border-t border-primary/20">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div class="text-center">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
-                      </svg>
-                    </div>
-                    <h5 class="text-white font-semibold">Grado</h5>
-                    <p class="text-gray-300 text-sm">4 años de formación</p>
-                  </div>
-                  
-                  <div class="text-center">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                      </svg>
-                    </div>
-                    <h5 class="text-white font-semibold">Ubicación</h5>
-                    <p class="text-gray-300 text-sm">Burgos, España</p>
-                  </div>
-                  
-                  <div class="text-center">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mx-auto mb-3">
-                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
-                      </svg>
-                    </div>
-                    <h5 class="text-white font-semibold">Estado</h5>
-                    <p class="text-gray-300 text-sm">Graduado</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="py-20 relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-dark-900 via-primary/5 to-dark-900"></div>
-      <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23FF1E56\" fill-opacity=\"0.1\"%3E%3Ccircle cx=\"30\" cy=\"30\" r=\"4\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-      
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-6xl mx-auto">
-          <div class="text-center mb-20">
-            <div class="inline-flex items-center gap-3 mb-6">
-              <div class="w-12 h-0.5 bg-gradient-to-r from-transparent to-primary"></div>
-              <span class="text-primary font-semibold tracking-widest uppercase text-sm">Contacto</span>
-              <div class="w-12 h-0.5 bg-gradient-to-l from-transparent to-primary"></div>
-            </div>
-            <h2 class="text-6xl font-black mb-6 text-white">
-              ¡Trabajemos <span class="text-primary">Juntos!</span>
-            </h2>
-            <p class="text-gray-300 text-xl max-w-3xl mx-auto leading-relaxed">
-              ¿Tienes una idea brillante? Hablemos sobre cómo podemos convertirla en realidad. Siempre estoy abierto a nuevos desafíos y colaboraciones emocionantes.
-            </p>
-          </div>
-
-          <div class="grid lg:grid-cols-2 gap-16 items-start">
-            <div class="space-y-8">
-              <div class="bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-sm rounded-3xl p-8 border border-primary/20">
-                <h3 class="text-2xl font-bold text-white mb-6">Información de Contacto</h3>
-                
-                <div class="space-y-6">
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold">Email</h4>
-                      <p class="text-gray-300">1018sgm10182@gmail.com</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold">Ubicación</h4>
-                      <p class="text-gray-300">Burgos, España</p>
-                    </div>
-                  </div>
-
-                  <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 class="text-white font-semibold">Disponibilidad</h4>
-                      <p class="text-gray-300">Lun - Vie: 9:00 - 18:00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Redes sociales -->
-              <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
-                <h3 class="text-2xl font-bold text-white mb-6">Sígueme en</h3>
-                <div class="flex gap-4">
-                  <a href="https://github.com/sgm1018" target="_blank" rel="noopener noreferrer" 
-                     class="w-14 h-14 bg-dark-800/50 hover:bg-primary/20 border border-gray-600 hover:border-primary/50 rounded-2xl flex items-center justify-center transition-all duration-300 group">
-                    <i class="devicon-github-original text-2xl text-gray-300 group-hover:text-primary"></i>
-                  </a>
-                  <a href="https://linkedin.com/in/sergiogm1999" target="_blank" rel="noopener noreferrer" 
-                     class="w-14 h-14 bg-dark-800/50 hover:bg-primary/20 border border-gray-600 hover:border-primary/50 rounded-2xl flex items-center justify-center transition-all duration-300 group">
-                    <i class="devicon-linkedin-plain text-2xl text-gray-300 group-hover:text-primary"></i>
-                  </a>
-                  <a href="#" target="_blank" rel="noopener noreferrer" 
-                     class="w-14 h-14 bg-dark-800/50 hover:bg-primary/20 border border-gray-600 hover:border-primary/50 rounded-2xl flex items-center justify-center transition-all duration-300 group">
-                    <i class="devicon-twitter-original text-2xl text-gray-300 group-hover:text-primary"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Formulario -->
-            <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
-              <form id="contact-form" class="space-y-6" action="https://formsubmit.co/1018sgm10182@gmail.com" method="POST" onsubmit="handleSubmit(event)">
-                <div class="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label for="name" class="block text-sm font-semibold text-white mb-3">Nombre *</label>
-                    <input type="text" id="name" name="name" 
-                           class="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 focus:border-primary rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-white placeholder-gray-400" 
-                           placeholder="Tu nombre completo"
-                           required />
-                  </div>
-                  <div>
-                    <label for="email" class="block text-sm font-semibold text-white mb-3">Email *</label>
-                    <input type="email" id="email" name="email" 
-                           class="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 focus:border-primary rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-white placeholder-gray-400" 
-                           placeholder="tu@email.com"
-                           required />
-                  </div>
-                </div>
-
-                <div>
-                  <label for="subject" class="block text-sm font-semibold text-white mb-3">Asunto</label>
-                  <input type="text" id="subject" name="subject" 
-                         class="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 focus:border-primary rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-white placeholder-gray-400" 
-                         placeholder="¿En qué puedo ayudarte?" />
-                </div>
-
-                <div>
-                  <label for="message" class="block text-sm font-semibold text-white mb-3">Mensaje *</label>
-                  <textarea id="message" name="message" rows="6" 
-                            class="w-full px-4 py-3 bg-dark-800/50 border border-gray-600 focus:border-primary rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary/20 text-white placeholder-gray-400 resize-none" 
-                            placeholder="Cuéntame más sobre tu proyecto..."
-                            required></textarea>
-                </div>
-
-                <button type="submit" class="w-full px-8 py-4 bg-gradient-to-r from-primary to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-2xl font-semibold shadow-lg hover:shadow-primary/20">
-                  <span class="flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
-                    </svg>
-                    Enviar Mensaje
-                  </span>
-                </button>
-
-                <div id="success-message" class="hidden text-center text-primary font-semibold bg-primary/10 border border-primary/20 rounded-2xl p-4">
-                  ✅ Mensaje enviado correctamente. Te responderé pronto.
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="py-8 border-t border-dark-700">
-      <div class="container mx-auto px-6 text-center text-dark-300">
-        <div class="flex items-center justify-center gap-2 mb-4">
-          <span>Creado con</span>
-          <a
-            href="https://astro.build"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 text-primary hover:text-primary-400 transition-colors duration-300"
-          >
-            <i class="devicon-astro-plain"></i>
-            <span>Astro</span>
-          </a>
-        </div>
-        <div class="flex items-center justify-center gap-2">
-          <p>By <span class="font-semibold">Sergio González Martínez.</span></p>
-          <a
-            href="https://github.com/sgm1018/portfolio"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 text-primary hover:text-primary-400 transition-colors duration-300"
-          >
-            <i class="devicon-github-original"></i>
-            <span>Ver código fuente</span>
-          </a>
-        </div>
-      </div>
-    </footer>
+    
+    <!-- About Section -->
+    <AboutSection />
+    
+    <!-- Services Section -->
+    <ServicesSection />
+    
+    <!-- Projects Section -->
+    <ProjectsSection />
+    
+    <!-- Tech Stack Section -->
+    <TechStackSection />
+    
+    <!-- Experience Section -->
+    <ExperienceSection />
+    
+    <!-- Contact Section -->
+    <ContactSection />
   </main>
+
+  <!-- Scroll Reveal Animation System -->
+  <ScrollReveal />
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-bar fixed top-0 left-0 h-1 bg-gradient-to-r from-primary to-primary-400 z-50 transition-all duration-300"></div>
 </Layout>
+
+<style is:global>
+  /* Scroll Progress Bar */
+  .scroll-progress-bar {
+    width: 0%;
+    transform-origin: left center;
+  }
+
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Enhanced focus styles for accessibility */
+  *:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--dark-900);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-600);
+  }
+
+  /* Selection styles */
+  ::selection {
+    background: var(--primary);
+    color: white;
+  }
+
+  ::-moz-selection {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* Page transition effects */
+  main {
+    opacity: 0;
+    animation: page-fade-in 0.8s ease-out forwards;
+  }
+
+  @keyframes page-fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
+
+<script>
+// Enhanced page functionality
+class PortfolioApp {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    this.setupScrollProgress();
+    this.setupSmoothScrolling();
+  }
+
+  setupScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress-bar') as HTMLElement;
+    if (!progressBar) return;
+
+    const updateProgress = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / scrollHeight) * 100;
+      
+      progressBar.style.width = `${Math.min(progress, 100)}%`;
+    };
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href')!) as HTMLElement;
+        
+        if (target) {
+          const offsetTop = target.offsetTop - 100;
+          
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+          
+          history.pushState(null, '', anchor.getAttribute('href'));
+        }
+      });
+    });
+  }
+}
+
+// Initialize the app when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  new PortfolioApp();
+});
+</script>

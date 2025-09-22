@@ -1,0 +1,144 @@
+---
+import type { Technology } from '../../data/technologies';
+
+interface Props {
+  technology: Technology;
+  size?: 'sm' | 'md' | 'lg';
+  showLabel?: boolean;
+  showLevel?: boolean;
+  animated?: boolean;
+}
+
+const { 
+  technology, 
+  size = 'md', 
+  showLabel = true, 
+  showLevel = false,
+  animated = true 
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'w-12 h-12 text-2xl',
+  md: 'w-16 h-16 text-3xl',
+  lg: 'w-20 h-20 text-4xl'
+};
+
+const containerClasses = {
+  sm: 'gap-2',
+  md: 'gap-3',
+  lg: 'gap-4'
+};
+
+const levelColors = {
+  'Básico': 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20',
+  'Intermedio': 'text-blue-400 bg-blue-400/10 border-blue-400/20',
+  'Avanzado': 'text-green-400 bg-green-400/10 border-green-400/20',
+  'Experto': 'text-purple-400 bg-purple-400/10 border-purple-400/20'
+};
+---
+
+<div 
+  class={`tech-icon-container flex flex-col items-center ${containerClasses[size]} group ${animated ? 'tech-animated' : ''}`}
+  data-scroll-reveal
+  title={`${technology.name} - ${technology.level}`}
+>
+  <!-- Icon Container -->
+  <div class={`tech-icon relative ${sizeClasses[size]} rounded-2xl bg-gradient-to-br from-dark-800 to-dark-900 border-2 border-dark-700 flex items-center justify-center transition-all duration-500 group-hover:border-primary group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-lg group-hover:shadow-primary/25`}>
+    
+    <!-- Main Icon -->
+    <i 
+      class={`${technology.icon} transition-all duration-500 group-hover:scale-110`}
+      style={technology.color ? `color: ${technology.color}` : ''}
+    ></i>
+    
+    <!-- Experience Badge -->
+    {technology.experience > 0 && (
+      <div class="absolute -top-2 -right-2 w-6 h-6 bg-primary rounded-full flex items-center justify-center text-xs font-bold text-white border-2 border-dark-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {technology.experience}
+      </div>
+    )}
+    
+    <!-- Glow Effect -->
+    <div class="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+    
+    <!-- Floating particles -->
+    {animated && (
+      <div class="absolute -inset-4 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+        <div class="absolute top-0 left-1/2 w-1 h-1 bg-primary/60 rounded-full animate-float-1"></div>
+        <div class="absolute bottom-0 right-1/4 w-0.5 h-0.5 bg-primary/40 rounded-full animate-float-2"></div>
+        <div class="absolute top-1/3 right-0 w-0.5 h-0.5 bg-primary/50 rounded-full animate-float-3"></div>
+      </div>
+    )}
+  </div>
+
+  <!-- Label -->
+  {showLabel && (
+    <div class="text-center">
+      <span class="text-sm font-medium text-dark-200 group-hover:text-foreground transition-colors duration-300 block">
+        {technology.name}
+      </span>
+      
+      {showLevel && (
+        <span class={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium mt-1 border ${levelColors[technology.level]}`}>
+          {technology.level}
+        </span>
+      )}
+    </div>
+  )}
+</div>
+
+<style>
+  .tech-animated {
+    opacity: 0;
+    transform: translateY(30px) scale(0.8);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .tech-animated.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @keyframes float-1 {
+    0%, 100% { transform: translateY(0px) translateX(-50%); }
+    33% { transform: translateY(-8px) translateX(-40%); }
+    66% { transform: translateY(-4px) translateX(-60%); }
+  }
+
+  @keyframes float-2 {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  @keyframes float-3 {
+    0%, 100% { transform: translateY(0px) translateX(0); }
+    25% { transform: translateY(-6px) translateX(-4px); }
+    75% { transform: translateY(-10px) translateX(4px); }
+  }
+
+  .animate-float-1 { animation: float-1 3s ease-in-out infinite; }
+  .animate-float-2 { animation: float-2 2.5s ease-in-out infinite 0.5s; }
+  .animate-float-3 { animation: float-3 2.8s ease-in-out infinite 1s; }
+
+  /* Pulse effect for icon colors */
+  .tech-icon i[style*="color"] {
+    animation: color-pulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+
+  @keyframes color-pulse {
+    0%, 100% { filter: drop-shadow(0 0 8px currentColor) brightness(1); }
+    50% { filter: drop-shadow(0 0 12px currentColor) brightness(1.2); }
+  }
+
+  .group:hover .tech-icon i[style*="color"] {
+    animation: none;
+    filter: drop-shadow(0 0 16px currentColor) brightness(1.3);
+  }
+
+  @media (max-width: 768px) {
+    .tech-icon-container {
+      transform: scale(0.9);
+    }
+  }
+</style>

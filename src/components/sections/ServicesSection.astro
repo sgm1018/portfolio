@@ -1,0 +1,192 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import ServiceCard from '../ui/ServiceCard.astro';
+import { services } from '../../data/services';
+---
+
+<section id="services" class="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-dark-900/50 to-dark-900/80" data-scroll-section>
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 1px 1px, rgba(255,30,86,0.5) 1px, transparent 0); background-size: 40px 40px;"></div>
+  </div>
+
+  <!-- Floating Background Elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-20 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float-slow"></div>
+    <div class="absolute bottom-20 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl animate-float-slow animation-delay-3000"></div>
+    <div class="absolute top-1/2 left-10 w-48 h-48 bg-primary/8 rounded-full blur-2xl animate-float-slow animation-delay-1500"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <SectionTitle 
+      title="Servicios"
+      subtitle="Soluciones tecnológicas integrales para impulsar tu negocio hacia el futuro digital"
+    />
+    
+    <!-- Services Grid -->
+    <div class="mt-16 grid md:grid-cols-2 gap-8 lg:gap-12">
+      {services.map((service, index) => (
+        <ServiceCard 
+          service={service} 
+          index={index}
+        />
+      ))}
+    </div>
+
+    <!-- Process Section -->
+    <div class="mt-24" data-scroll-reveal>
+      <div class="text-center mb-12">
+        <h3 class="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          Mi Proceso de Trabajo
+        </h3>
+        <p class="text-lg text-dark-300 max-w-2xl mx-auto">
+          Un enfoque estructurado que garantiza resultados excepcionales
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-4 gap-8">
+        {[
+          {
+            step: "01",
+            title: "Análisis",
+            description: "Comprendo tus necesidades y objetivos para diseñar la solución perfecta",
+            icon: "🔍"
+          },
+          {
+            step: "02", 
+            title: "Diseño",
+            description: "Creo arquitecturas escalables y interfaces intuitivas centradas en el usuario",
+            icon: "🎨"
+          },
+          {
+            step: "03",
+            title: "Desarrollo",
+            description: "Implemento soluciones robustas con las mejores prácticas y tecnologías modernas",
+            icon: "⚡"
+          },
+          {
+            step: "04",
+            title: "Optimización",
+            description: "Aseguro el rendimiento óptimo, seguridad y mantenibilidad a largo plazo",
+            icon: "🚀"
+          }
+        ].map((process, index) => (
+          <div 
+            class="process-step text-center group"
+            data-scroll-reveal
+            style={`--animation-delay: ${index * 200}ms`}
+          >
+            <div class="relative mb-6">
+              <!-- Step Number -->
+              <div class="w-16 h-16 mx-auto bg-gradient-to-br from-primary/20 to-primary/10 rounded-2xl flex items-center justify-center border border-primary/20 group-hover:border-primary/40 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
+                <span class="text-2xl">{process.icon}</span>
+              </div>
+              
+              <!-- Step Badge -->
+              <div class="absolute -top-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-xs font-bold text-white border-2 border-dark-900 group-hover:scale-125 transition-transform duration-300">
+                {process.step}
+              </div>
+              
+              <!-- Connector Line (not for last item) -->
+              {index < 3 && (
+                <div class="hidden md:block absolute top-8 left-full w-full h-px bg-gradient-to-r from-primary/50 to-dark-600 transform translate-x-4">
+                  <div class="absolute right-0 top-0 w-2 h-2 bg-primary/50 rounded-full transform translate-y-[-50%]"></div>
+                </div>
+              )}
+            </div>
+            
+            <h4 class="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+              {process.title}
+            </h4>
+            
+            <p class="text-sm text-dark-300 leading-relaxed group-hover:text-dark-200 transition-colors duration-300">
+              {process.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="mt-20 text-center" data-scroll-reveal>
+      <div class="relative inline-block">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/40 rounded-2xl blur-xl"></div>
+        <div class="relative bg-gradient-to-br from-dark-800/90 to-dark-900/90 rounded-2xl p-8 md:p-12 border border-dark-700 backdrop-blur-sm">
+          <h3 class="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            ¿Listo para llevar tu proyecto al siguiente nivel?
+          </h3>
+          <p class="text-lg text-dark-300 mb-8 max-w-2xl mx-auto">
+            Hablemos sobre cómo puedo ayudarte a materializar tus ideas con soluciones tecnológicas de vanguardia.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="#contact"
+              class="inline-flex items-center px-8 py-4 bg-primary hover:bg-primary-600 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 group"
+            >
+              <svg class="w-5 h-5 mr-2 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+              </svg>
+              Iniciar Conversación
+            </a>
+            
+            <a 
+              href="#projects"
+              class="inline-flex items-center px-8 py-4 bg-transparent hover:bg-dark-800 text-foreground font-semibold rounded-xl transition-all duration-300 hover:scale-105 border border-dark-600 hover:border-primary/50 group"
+            >
+              <svg class="w-5 h-5 mr-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0l-4-4m4 4l-4 4"></path>
+              </svg>
+              Ver Proyectos
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-step {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--animation-delay);
+  }
+
+  .process-step.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(1deg); }
+    66% { transform: translateY(-10px) rotate(-1deg); }
+  }
+
+  .animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+  }
+
+  .animation-delay-1500 { animation-delay: 1.5s; }
+  .animation-delay-3000 { animation-delay: 3s; }
+
+  /* Grid responsive adjustments */
+  @media (max-width: 768px) {
+    .process-step .hidden {
+      display: none !important;
+    }
+    
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .process-step {
+      margin-bottom: 3rem;
+    }
+  }
+</style>

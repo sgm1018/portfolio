@@ -1,0 +1,63 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  centered?: boolean;
+  className?: string;
+}
+
+const { title, subtitle, centered = true, className = '' } = Astro.props;
+---
+
+<div class={`section-title ${centered ? 'text-center' : ''} ${className}`} data-scroll-reveal>
+  <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 relative inline-block hover:text-primary transition-colors duration-300">
+    {title}
+  </h2>
+  
+  {subtitle && (
+    <p class="text-lg md:text-xl text-dark-300 max-w-2xl mx-auto leading-relaxed">
+      {subtitle}
+    </p>
+  )}
+  
+  <div class="title-decoration mt-6">
+    <div class="flex items-center justify-center gap-4">
+      <div class="w-12 h-px bg-gradient-to-r from-transparent to-primary"></div>
+      <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+      <div class="w-24 h-px bg-primary"></div>
+      <div class="w-2 h-2 bg-primary rounded-full animate-pulse animation-delay-1000"></div>
+      <div class="w-12 h-px bg-gradient-to-l from-transparent to-primary"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .section-title {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .section-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+
+  @media (max-width: 768px) {
+    .section-title h2 {
+      font-size: 2.5rem;
+    }
+    
+    .title-decoration .w-24 {
+      width: 3rem;
+    }
+    
+    .title-decoration .w-12 {
+      width: 2rem;
+    }
+  }
+</style>

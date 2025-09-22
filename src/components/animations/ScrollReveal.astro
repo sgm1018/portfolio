@@ -1,0 +1,304 @@
+---
+// Este componente se encarga de las animaciones de entrada al scroll
+---
+
+<div class="scroll-reveal-container">
+  <slot />
+</div>
+
+<script>
+class ScrollReveal {
+  private observer: IntersectionObserver;
+  private elements: NodeListOf<Element>;
+
+  constructor() {
+    this.elements = document.querySelectorAll('[data-scroll-reveal]');
+    this.init();
+  }
+
+  private init(): void {
+    this.createObserver();
+    this.observeElements();
+    this.setupStaggerAnimations();
+  }
+
+  private createObserver(): void {
+    const options: IntersectionObserverInit = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.animateElement(entry.target);
+          this.observer.unobserve(entry.target);
+        }
+      });
+    }, options);
+  }
+
+  private observeElements(): void {
+    this.elements.forEach(element => {
+      this.observer.observe(element);
+    });
+  }
+
+  private animateElement(element: Element): void {
+    // Add visible class for CSS transitions
+    element.classList.add('visible');
+
+    // Handle specific animation types
+    const animationType = element.getAttribute('data-animation');
+    
+    switch (animationType) {
+      case 'fade-up':
+        this.fadeUp(element);
+        break;
+      case 'fade-left':
+        this.fadeLeft(element);
+        break;
+      case 'fade-right':
+        this.fadeRight(element);
+        break;
+      case 'scale-in':
+        this.scaleIn(element);
+        break;
+      case 'slide-up':
+        this.slideUp(element);
+        break;
+      default:
+        this.defaultAnimation(element);
+        break;
+    }
+
+    // Trigger stagger animations for children
+    this.triggerStaggerChildren(element);
+  }
+
+  private fadeUp(element: Element): void {
+    const el = element as HTMLElement;
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(50px)';
+    
+    requestAnimationFrame(() => {
+      el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
+  }
+
+  private fadeLeft(element: Element): void {
+    const el = element as HTMLElement;
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-50px)';
+    
+    requestAnimationFrame(() => {
+      el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      el.style.opacity = '1';
+      el.style.transform = 'translateX(0)';
+    });
+  }
+
+  private fadeRight(element: Element): void {
+    const el = element as HTMLElement;
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(50px)';
+    
+    requestAnimationFrame(() => {
+      el.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      el.style.opacity = '1';
+      el.style.transform = 'translateX(0)';
+    });
+  }
+
+  private scaleIn(element: Element): void {
+    const el = element as HTMLElement;
+    el.style.opacity = '0';
+    el.style.transform = 'scale(0.8)';
+    
+    requestAnimationFrame(() => {
+      el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      el.style.opacity = '1';
+      el.style.transform = 'scale(1)';
+    });
+  }
+
+  private slideUp(element: Element): void {
+    const el = element as HTMLElement;
+    el.style.transform = 'translateY(100%)';
+    
+    requestAnimationFrame(() => {
+      el.style.transition = 'transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+      el.style.transform = 'translateY(0)';
+    });
+  }
+
+  private defaultAnimation(element: Element): void {
+    // Default fade-up animation
+    this.fadeUp(element);
+  }
+
+  private setupStaggerAnimations(): void {
+    // Handle elements with stagger animation
+    const staggerContainers = document.querySelectorAll('[data-stagger]');
+    
+    staggerContainers.forEach(container => {
+      const children = container.children;
+      const staggerDelay = parseInt(container.getAttribute('data-stagger') || '100');
+      
+      Array.from(children).forEach((child, index) => {
+        const el = child as HTMLElement;
+        el.style.transitionDelay = `${index * staggerDelay}ms`;
+      });
+    });
+  }
+
+  private triggerStaggerChildren(element: Element): void {
+    const staggerChildren = element.querySelectorAll('[data-stagger-child]');
+    
+    staggerChildren.forEach((child, index) => {
+      const el = child as HTMLElement;
+      const delay = index * 100;
+      
+      setTimeout(() => {
+        el.classList.add('visible');
+      }, delay);
+    });
+  }
+
+  // Public method to manually trigger animation
+  public animateElementManually(selector: string): void {
+    const element = document.querySelector(selector);
+    if (element) {
+      this.animateElement(element);
+    }
+  }
+
+  // Public method to reset animations
+  public resetAnimations(): void {
+    this.elements.forEach(element => {
+      element.classList.remove('visible');
+    });
+  }
+
+  // Public method to destroy observer
+  public destroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  }
+}
+
+// Initialize scroll reveal when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Small delay to ensure all elements are rendered
+  setTimeout(() => {
+    window.scrollReveal = new ScrollReveal();
+  }, 100);
+});
+
+// Handle page visibility changes
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && window.scrollReveal) {
+    // Re-check visible elements when page becomes visible
+    setTimeout(() => {
+      const elements = document.querySelectorAll('[data-scroll-reveal]:not(.visible)');
+      elements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        if (isVisible) {
+          window.scrollReveal.animateElementManually(element as any);
+        }
+      });
+    }, 100);
+  }
+});
+
+// Export for TypeScript
+declare global {
+  interface Window {
+    scrollReveal: ScrollReveal;
+  }
+}
+</script>
+
+<style>
+  /* Base states for scroll reveal elements */
+  [data-scroll-reveal] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-scroll-reveal].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Animation variants */
+  [data-animation="fade-left"] {
+    transform: translateX(-50px);
+  }
+
+  [data-animation="fade-right"] {
+    transform: translateX(50px);
+  }
+
+  [data-animation="scale-in"] {
+    transform: scale(0.8);
+  }
+
+  [data-animation="slide-up"] {
+    transform: translateY(100%);
+  }
+
+  [data-animation="fade-left"].visible,
+  [data-animation="fade-right"].visible {
+    transform: translateX(0);
+  }
+
+  [data-animation="scale-in"].visible {
+    transform: scale(1);
+  }
+
+  [data-animation="slide-up"].visible {
+    transform: translateY(0);
+  }
+
+  /* Stagger animations */
+  [data-stagger-child] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-stagger-child].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    [data-scroll-reveal],
+    [data-stagger-child] {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    [data-scroll-reveal] {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Performance optimizations */
+  [data-scroll-reveal] {
+    will-change: opacity, transform;
+  }
+
+  [data-scroll-reveal].visible {
+    will-change: auto;
+  }
+</style>

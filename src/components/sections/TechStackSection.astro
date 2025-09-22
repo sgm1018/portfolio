@@ -1,0 +1,238 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import TechIcon from '../ui/TechIcon.astro';
+import { technologies } from '../../data/technologies';
+---
+
+<section id="technologies" class="py-20 md:py-32 relative overflow-hidden bg-gradient-to-b from-dark-900/80 to-dark-900/50" data-scroll-section>
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,30,86,0.3) 1px, transparent 0); background-size: 60px 60px;"></div>
+  </div>
+
+  <!-- Floating Elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-20 right-1/4 w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-pulse"></div>
+    <div class="absolute bottom-20 left-1/4 w-48 h-48 bg-primary/5 rounded-full blur-3xl animate-pulse animation-delay-2000"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <SectionTitle 
+      title="Tecnologías"
+      subtitle="Herramientas y tecnologías que domino para crear soluciones robustas y escalables"
+    />
+    
+    <!-- Technology Categories -->
+    <div class="mt-16 space-y-16">
+      {technologies.map((category, categoryIndex) => (
+        <div 
+          class="tech-category" 
+          data-scroll-reveal
+          style={`--category-delay: ${categoryIndex * 200}ms`}
+        >
+          <!-- Category Header -->
+          <div class="flex items-center gap-4 mb-8">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center border border-primary/20">
+              <i class={`${category.icon} text-2xl text-primary`}></i>
+            </div>
+            <div>
+              <h3 class="text-2xl md:text-3xl font-bold text-foreground">
+                {category.name}
+              </h3>
+              <div class="w-16 h-1 bg-primary rounded-full mt-2"></div>
+            </div>
+          </div>
+
+          <!-- Technologies Grid -->
+          <div 
+            class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6"
+            data-stagger="100"
+          >
+            {category.technologies.map((tech, techIndex) => (
+              <div data-stagger-child>
+                <TechIcon 
+                  technology={tech} 
+                  size="md" 
+                  showLabel={true}
+                  showLevel={false}
+                  animated={true}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Skills Summary -->
+    <div class="mt-20" data-scroll-reveal>
+      <div class="bg-gradient-to-br from-dark-800/90 to-dark-900/90 rounded-2xl p-8 md:p-12 border border-dark-700 backdrop-blur-sm">
+        <h3 class="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+          Nivel de Experiencia
+        </h3>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {['Experto', 'Avanzado', 'Intermedio', 'Básico'].map((level, index) => {
+            const techsAtLevel = technologies.flatMap(cat => cat.technologies).filter(tech => tech.level === level);
+            const colors = {
+              'Experto': 'text-purple-400 bg-purple-400/10 border-purple-400/20',
+              'Avanzado': 'text-green-400 bg-green-400/10 border-green-400/20',
+              'Intermedio': 'text-blue-400 bg-blue-400/10 border-blue-400/20',
+              'Básico': 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20'
+            };
+            
+            return (
+              <div class={`text-center p-6 rounded-xl border transition-all duration-300 hover:scale-105 ${colors[level as keyof typeof colors]}`}>
+                <div class="text-3xl font-bold mb-2">
+                  {techsAtLevel.length}
+                </div>
+                <div class="text-sm font-medium mb-3">{level}</div>
+                <div class="text-xs opacity-75">
+                  {techsAtLevel.slice(0, 2).map(tech => tech.name).join(', ')}
+                  {techsAtLevel.length > 2 && ` +${techsAtLevel.length - 2}`}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Continuous Learning Section -->
+    <div class="mt-16" data-scroll-reveal>
+      <div class="text-center">
+        <h3 class="text-2xl md:text-3xl font-bold text-foreground mb-6">
+          Aprendizaje Continuo
+        </h3>
+        <p class="text-lg text-dark-300 mb-8 max-w-2xl mx-auto">
+          La tecnología evoluciona constantemente, y yo con ella. Siempre estoy explorando nuevas herramientas y metodologías.
+        </p>
+        
+        <!-- Currently Learning -->
+        <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          {[
+            {
+              title: "IA y Machine Learning",
+              description: "Profundizando en modelos de lenguaje y computer vision",
+              icon: "🤖",
+              progress: "75%"
+            },
+            {
+              title: "Cloud Native",
+              description: "Arquitecturas serverless y edge computing",
+              icon: "☁️",
+              progress: "60%"
+            },
+            {
+              title: "Web3 & Blockchain",
+              description: "Smart contracts y aplicaciones descentralizadas",
+              icon: "🔗",
+              progress: "40%"
+            }
+          ].map((item, index) => (
+            <div 
+              class="learning-card p-6 bg-gradient-to-br from-dark-800/60 to-dark-900/60 rounded-xl border border-dark-700 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 group"
+              style={`--animation-delay: ${index * 150}ms`}
+            >
+              <div class="text-4xl mb-4">{item.icon}</div>
+              <h4 class="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">
+                {item.title}
+              </h4>
+              <p class="text-sm text-dark-300 mb-4">
+                {item.description}
+              </p>
+              
+              <!-- Progress Bar -->
+              <div class="w-full bg-dark-700 rounded-full h-2">
+                <div 
+                  class="bg-gradient-to-r from-primary to-primary-400 h-2 rounded-full transition-all duration-1000 progress-bar"
+                  style={`width: ${item.progress}`}
+                ></div>
+              </div>
+              <div class="text-xs text-primary font-medium mt-2">{item.progress}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Recommendations -->
+    <div class="mt-16 text-center" data-scroll-reveal>
+      <div class="inline-flex items-center gap-4 p-4 bg-primary/10 rounded-xl border border-primary/20">
+        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span class="text-sm text-primary font-medium">
+          ¿Necesitas asesoramiento sobre qué tecnologías usar en tu proyecto?
+        </span>
+        <a 
+          href="#contact"
+          class="px-4 py-2 bg-primary hover:bg-primary-600 text-white text-sm font-medium rounded-lg transition-all duration-300 hover:scale-105"
+        >
+          Consultar
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tech-category {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--category-delay);
+  }
+
+  .tech-category.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .learning-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--animation-delay);
+  }
+
+  .learning-card.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .progress-bar {
+    width: 0;
+    animation: progress-fill 2s ease-out forwards;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes progress-fill {
+    from { width: 0; }
+  }
+
+  .learning-card:nth-child(1) .progress-bar { animation-delay: 1s; }
+  .learning-card:nth-child(2) .progress-bar { animation-delay: 1.2s; }
+  .learning-card:nth-child(3) .progress-bar { animation-delay: 1.4s; }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  @media (max-width: 768px) {
+    .tech-category .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    
+    .learning-card {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tech-category .grid {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,189 @@
+---
+interface Props {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  target?: string;
+  className?: string;
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  onclick?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  target,
+  className = '',
+  disabled = false,
+  type = 'button',
+  onclick
+} = Astro.props;
+
+const baseClasses = 'animated-button relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-primary/25 overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100';
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg'
+};
+
+const variantClasses = {
+  primary: 'bg-gradient-to-r from-primary to-primary-600 text-white border-2 border-primary hover:from-primary-600 hover:to-primary-700 hover:border-primary-600 hover:shadow-lg hover:shadow-primary/25',
+  secondary: 'bg-gradient-to-r from-dark-700 to-dark-800 text-foreground border-2 border-dark-600 hover:from-dark-600 hover:to-dark-700 hover:border-dark-500 hover:shadow-lg hover:shadow-dark-500/25',
+  outline: 'bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/25',
+  ghost: 'bg-transparent text-foreground border-2 border-transparent hover:bg-dark-800 hover:border-dark-700 hover:text-primary'
+};
+
+const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;
+
+const Component = href ? 'a' : 'button';
+const componentProps = href 
+  ? { href, target, class: combinedClasses }
+  : { type, class: combinedClasses, disabled, onclick };
+---
+
+<Component {...componentProps}>
+  <!-- Content -->
+  <span class="relative z-10 flex items-center">
+    <slot />
+  </span>
+  
+  <!-- Ripple Effect -->
+  <div class="absolute inset-0 overflow-hidden rounded-xl">
+    <div class="ripple absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 group-active:scale-150 transition-transform duration-500 origin-center"></div>
+  </div>
+  
+  <!-- Shine Effect -->
+  <div class="absolute inset-0 rounded-xl">
+    <div class="shine absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 skew-x-12"></div>
+  </div>
+  
+  <!-- Border glow -->
+  {variant === 'primary' && (
+    <div class="absolute inset-0 rounded-xl border-2 border-primary/50 blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+  )}
+  
+  <!-- Floating particles for primary variant -->
+  {variant === 'primary' && (
+    <div class="particles absolute -inset-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+      <div class="absolute top-0 left-1/4 w-1 h-1 bg-white/60 rounded-full animate-particle-float-1"></div>
+      <div class="absolute bottom-0 right-1/4 w-0.5 h-0.5 bg-white/40 rounded-full animate-particle-float-2"></div>
+      <div class="absolute top-1/2 right-0 w-0.5 h-0.5 bg-white/50 rounded-full animate-particle-float-3"></div>
+    </div>
+  )}
+</Component>
+
+<style>
+  .animated-button {
+    position: relative;
+    transform-style: preserve-3d;
+  }
+
+  .animated-button:hover {
+    transform: scale(1.05) translateZ(0);
+  }
+
+  .animated-button:active {
+    transform: scale(0.95) translateZ(0);
+  }
+
+  .ripple {
+    transform: scale(0);
+    opacity: 0.7;
+  }
+
+  .group:hover .ripple {
+    transform: scale(4);
+    opacity: 0;
+  }
+
+  .group:active .ripple {
+    transform: scale(6);
+    transition-duration: 0.2s;
+  }
+
+  @keyframes particle-float-1 {
+    0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+    10% { opacity: 1; }
+    50% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+    90% { opacity: 0; }
+  }
+
+  @keyframes particle-float-2 {
+    0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+    15% { opacity: 1; }
+    50% { transform: translateY(15px) translateX(-8px); opacity: 1; }
+    85% { opacity: 0; }
+  }
+
+  @keyframes particle-float-3 {
+    0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+    20% { opacity: 1; }
+    50% { transform: translateY(-10px) translateX(-15px); opacity: 1; }
+    80% { opacity: 0; }
+  }
+
+  .animate-particle-float-1 { animation: particle-float-1 2s ease-out infinite; }
+  .animate-particle-float-2 { animation: particle-float-2 2.5s ease-out infinite 0.3s; }
+  .animate-particle-float-3 { animation: particle-float-3 2.2s ease-out infinite 0.6s; }
+
+  /* Loading state */
+  .animated-button[data-loading="true"] {
+    pointer-events: none;
+  }
+
+  .animated-button[data-loading="true"]:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: button-loading-spin 1s ease infinite;
+  }
+
+  @keyframes button-loading-spin {
+    from { transform: rotate(0turn); }
+    to { transform: rotate(1turn); }
+  }
+
+  /* Disabled state improvements */
+  .animated-button:disabled {
+    filter: grayscale(0.5);
+    transform: none;
+  }
+
+  .animated-button:disabled .shine,
+  .animated-button:disabled .ripple,
+  .animated-button:disabled .particles {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .animated-button {
+      min-height: 44px; /* Touch-friendly size */
+    }
+    
+    .animated-button:hover {
+      transform: scale(1.02); /* Reduced hover effect on mobile */
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animated-button,
+    .ripple,
+    .shine,
+    .particles > div {
+      animation: none !important;
+      transition-duration: 0.1s !important;
+    }
+
+    .animated-button:hover {
+      transform: none;
+    }
+  }
+</style>
